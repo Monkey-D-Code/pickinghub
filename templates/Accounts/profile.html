@@ -1,0 +1,202 @@
+{% extends 'Base.html '%}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+    <title>
+       Profile | {{brand.full_name}}
+    </title>
+{% endblock %}
+
+{% block react_script %}
+  <script src='{% static "components/Website.js" %}' type='text/babel'></script>
+  <script type='text/babel'>
+    
+    class Profile extends React.Component {
+      state = {
+        customer : {},
+        master : {},
+        customer_id : '{{customer.id}}',
+        master_id : '{{master.id}}',
+        loading : false,
+        Url : `${window.location.protocol}//${window.location.hostname}:${window.location.port}`,
+      }
+      style = {
+        display_image : {
+          width : '20em',
+          height : '20em',
+          objectFit : 'cover',
+        },
+        profile_box :{
+          padding : '2em',
+          textAlign : 'center',
+        },
+        fullName:{
+          color : '#E28413'
+        },
+        adminBadge : {
+          width: '20em !important',
+        }
+      }
+      componentWillMount = ()=>{
+        const {
+          Url,
+          customer_id,
+          master_id,
+          } = this.state;
+        if(customer_id !== ''){
+          this.setState({loading:true});
+          axios.get(`${Url}/accounts/api/{{customer.id}}/get-profile/`)
+                .then((response)=>{
+                    this.setState({
+                      customer : response.data,
+                      loading:false,
+                    })
+
+                })
+                .catch((response , error)=>{
+                  console.log(error);
+                  this.setState({loading:false});
+                  alert(response.message);
+                })
+        }
+        if(master_id !== ''){
+          this.setState({loading:true});
+          axios.get(`${Url}/accounts/api/${master_id}/get-master/`)
+            .then((response)=>{
+              this.setState({
+                master : response.data,
+                loading:false,
+              })
+            })
+            .catch((response , error)=>{
+              console.log(error);
+              alert(response.message);
+              this.setState({loading:false});
+            })
+        }
+      }
+      render=()=>{
+        const {
+          loading,
+          customer,
+          master,
+
+        } = this.state;
+
+        const {
+          display_image,
+          profile_box,
+          fullName,
+          adminBadge,
+        } = this.style;
+        if(loading){
+          return(
+            <h2 className='text-center'>Loading Profile ...</h2>
+          );
+        }
+        return(
+
+            <div style={profile_box}>
+              {
+                typeof(customer.id) !== 'undefined' 
+                && <div>
+                
+                
+                  </div>
+              }
+              {
+                typeof(master.id) !== 'undefined'
+                && <div>
+                      <div className='row'>
+                        <div className='col-lg-4'>
+                          <img src={master.display_image} alt={master.username} style={display_image}/>
+                          <h3 style={fullName}><i className="fa fa-id-card" aria-hidden="true"></i> {master.full_name}</h3>
+                          <h4 className='badge-success' style={adminBadge}><i className="fa fa-user-secret" aria-hidden="true"></i> Admin User</h4>
+                          <ul>
+                            <li><i className="fa fa-at" aria-hidden="true"></i> {master.user.email}</li>
+                            <li><i className="fa fa-address-book-o" aria-hidden="true"></i> {master.contact_number}</li>
+                            <li><i className="fa fa-user-circle" aria-hidden="true"></i> {master.user.username}</li>
+                          </ul>
+                        
+                        
+                        </div>
+                        <div className='col-lg-8'>
+                            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                <li class="nav-item">
+                                  <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-website" role="tab" aria-controls="pills-website" aria-selected="true"><i className="fa fa-eye" aria-hidden="true"></i> Website</a>
+                                </li>
+                                <li class="nav-item">
+                                  <a class="nav-link" id="pills-department-tab" data-toggle="pill" href="#pills-department" role="tab" aria-controls="pills-department" aria-selected="false">Department</a>
+                                </li>
+                                <li class="nav-item">
+                                  <a class="nav-link" id="pills-demographic-tab" data-toggle="pill" href="#pills-demographic" role="tab" aria-controls="pills-demographic" aria-selected="false">Demographic</a>
+                                </li>
+                                <li class="nav-item">
+                                  <a class="nav-link" id="pills-category-tab" data-toggle="pill" href="#pills-category" role="tab" aria-controls="pills-category" aria-selected="false">Category</a>
+                                </li>
+                                <li class="nav-item">
+                                  <a class="nav-link" id="pills-company-tab" data-toggle="pill" href="#pills-company" role="tab" aria-controls="pills-company" aria-selected="false">Company</a>
+                                </li>
+                                <li class="nav-item">
+                                  <a class="nav-link" id="pills-product-tab" data-toggle="pill" href="#pills-product" role="tab" aria-controls="pills-product" aria-selected="false">Product</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="pills-tabContent">
+                              <div class="tab-pane fade show active" id="pills-website" role="tabpanel" aria-labelledby="pills-website-tab">
+                                <Website/>
+                              </div>
+                              <div class="tab-pane fade" id="pills-department" role="tabpanel" aria-labelledby="pills-department-tab">
+                                department
+                              </div>
+                              <div class="tab-pane fade" id="pills-demographic" role="tabpanel" aria-labelledby="pills-demographic-tab">
+                                demographic
+                              </div>
+                              <div class="tab-pane fade" id="pills-category" role="tabpanel" aria-labelledby="pills-category-tab">
+                                category
+                              </div>
+                              <div class="tab-pane fade" id="pills-company" role="tabpanel" aria-labelledby="pills-company-tab">
+                                company
+                              </div>
+                              <div class="tab-pane fade" id="pills-product" role="tabpanel" aria-labelledby="pills-product-tab">
+                                product
+                              </div>
+                            </div>
+                        </div>
+                      </div>
+                      
+                  </div>
+              
+              }
+
+            </div>
+        );
+      }
+    }
+    ReactDOM.render(<Profile/> , document.getElementById('root'));
+
+  </script>
+
+{% endblock %}
+
+
+{% block content %}
+    <style>
+        
+    </style>
+    <div class="hero-wrap hero-bread" style="background-image: url({{brand.random_hero_image}});">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+            <h2 class="mb-0 bread">{{customer.full_name}} {{master.full_name}}</h2>
+            <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'Website:home'%}">Home</a></span> <span>{{customer.full_name}}{{master.full_name}}</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br/>
+    <br/>
+    <section class='ftco-animate' id='root'>
+        
+    </section>
+{% endblock %}

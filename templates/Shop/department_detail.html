@@ -1,0 +1,289 @@
+{% extends 'Base.html '%}
+{% load static %}
+
+
+{% block title %}
+    <title>
+        {{object.name}} | {{brand.full_name}}
+    </title>
+{% endblock %}
+
+
+{% block content %}
+    <div class="hero-wrap hero-bread" style="background-image: url({{object.cover_image}});">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+            <h1 class="mb-0 bread">{{object.name}}</h1>
+            <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'Website:home'%}">Home</a></span> <span>{{object.name}}</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <section class="ftco-section bg-light">
+    	<div class="container-fluid">
+    		<div class="row">
+                {% if object.demographic_set.all %}
+                    {% for demographic in object.demographic_set.all %}
+                        <div class="col-sm col-md-6 col-lg-3 ftco-animate">
+                            <div class="product">
+                                <a href="{% url 'Shop:demographic-details' pk=demographic.id %}" class="img-prod"><img class="img-fluid" src="{{demographic.cover_image}}" alt="Colorlib Template">
+                                    <span class="status"><img src='{% static "Website/images/logo.png" %}' style='width:2em;height:2em;object-fit:fill;' /></span>
+                                </a>
+                                <div class="text py-3 px-3">
+                                    <h2><a href="{% url 'Shop:demographic-details' pk=demographic.id %}"">{{demographic.name}}</a></h2>
+                                    <div class="d-flex">
+                                        <div class="pricing">
+                                            <p class="price">{{demographic.desc|truncatewords:10}}</p>
+                                        </div>
+                                        <p>{{demographic.category_set.count}} Things Inside</p>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+    			<div class="col-sm col-md-6 col-lg-3 ftco-animate">
+    				<div class="product">
+    					<a href="#" class="img-prod"><img class="img-fluid" src="images/product-1.jpg" alt="Colorlib Template">
+    						<span class="status">30%</span>
+    					</a>
+    					<div class="text py-3 px-3">
+    						<h3><a href="#">Young Woman Wearing Dress</a></h3>
+    						<div class="d-flex">
+    							<div class="pricing">
+		    						<p class="price"><span class="mr-2 price-dc">$120.00</span><span class="price-sale">$80.00</span></p>
+		    					</div>
+		    					<div class="rating">
+	    							<p class="text-right">
+	    								<span class="ion-ios-star-outline"></span>
+	    								<span class="ion-ios-star-outline"></span>
+	    								<span class="ion-ios-star-outline"></span>
+	    								<span class="ion-ios-star-outline"></span>
+	    								<span class="ion-ios-star-outline"></span>
+	    							</p>
+	    						</div>
+	    					</div>
+	    					<hr>
+    						<p class="bottom-area d-flex">
+    							<a href="#" class="add-to-cart"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
+    							<a href="#" class="ml-auto"><span><i class="ion-ios-heart-empty"></i></span></a>
+    						</p>
+    					</div>
+    				</div>
+    			</div>
+    			<div class="col-sm col-md-6 col-lg-3 ftco-animate">
+    				<div class="product">
+    					<a href="#" class="img-prod"><img class="img-fluid" src="images/product-2.jpg" alt="Colorlib Template">
+    						<span class="status">New Arrival</span>
+    					</a>
+    					<div class="text py-3 px-3">
+    						<h3><a href="#">Young Woman Wearing Dress</a></h3>
+    						<div class="d-flex">
+    							<div class="pricing">
+		    						<p class="price"><span>$120.00</span></p>
+		    					</div>
+		    					<div class="rating">
+	    							<p class="text-right">
+	    								<span class="ion-ios-star-outline"></span>
+	    								<span class="ion-ios-star-outline"></span>
+	    								<span class="ion-ios-star-outline"></span>
+	    								<span class="ion-ios-star-outline"></span>
+	    								<span class="ion-ios-star-outline"></span>
+	    							</p>
+	    						</div>
+	    					</div>
+	    					<hr>
+    						<p class="bottom-area d-flex">
+    							<a href="#" class="add-to-cart"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
+    							<a href="#" class="ml-auto"><span><i class="ion-ios-heart-empty"></i></span></a>
+    						</p>
+    					</div>
+    				</div>
+    			</div>
+    			<div class="col-sm col-md-6 col-lg-3 ftco-animate">
+    				<div class="product">
+    					<a href="#" class="img-prod"><img class="img-fluid" src="images/product-3.jpg" alt="Colorlib Template"></a>
+    					<div class="text py-3 px-3">
+    						<h3><a href="#">Young Woman Wearing Dress</a></h3>
+    						<div class="d-flex">
+    							<div class="pricing">
+		    						<p class="price"><span>$120.00</span></p>
+		    					</div>
+		    					<div class="rating">
+	    							<p class="text-right">
+	    								<span class="ion-ios-star-outline"></span>
+	    								<span class="ion-ios-star-outline"></span>
+	    								<span class="ion-ios-star-outline"></span>
+	    								<span class="ion-ios-star-outline"></span>
+	    								<span class="ion-ios-star-outline"></span>
+	    							</p>
+	    						</div>
+	    					</div>
+	    					<hr>
+    						<p class="bottom-area d-flex">
+    							<a href="#" class="add-to-cart"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
+    							<a href="#" class="ml-auto"><span><i class="ion-ios-heart-empty"></i></span></a>
+    						</p>
+    					</div>
+    				</div>
+    			</div>
+    			<div class="col-sm col-md-6 col-lg-3 ftco-animate">
+    				<div class="product">
+    					<a href="#" class="img-prod"><img class="img-fluid" src="images/product-4.jpg" alt="Colorlib Template"></a>
+    					<div class="text py-3 px-3">
+    						<h3><a href="#">Young Woman Wearing Dress</a></h3>
+    						<div class="d-flex">
+    							<div class="pricing">
+		    						<p class="price"><span>$120.00</span></p>
+		    					</div>
+		    					<div class="rating">
+	    							<p class="text-right">
+	    								<span class="ion-ios-star-outline"></span>
+	    								<span class="ion-ios-star-outline"></span>
+	    								<span class="ion-ios-star-outline"></span>
+	    								<span class="ion-ios-star-outline"></span>
+	    								<span class="ion-ios-star-outline"></span>
+	    							</p>
+	    						</div>
+	    					</div>
+	    					<hr>
+    						<p class="bottom-area d-flex">
+    							<a href="#" class="add-to-cart"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
+    							<a href="#" class="ml-auto"><span><i class="ion-ios-heart-empty"></i></span></a>
+    						</p>
+    					</div>
+    				</div>
+    			</div>
+    			<div class="col-sm col-md-6 col-lg-3 ftco-animate">
+    				<div class="product">
+    					<a href="#" class="img-prod"><img class="img-fluid" src="images/product-5.jpg" alt="Colorlib Template"></a>
+    					<div class="text py-3 px-3">
+    						<h3><a href="#">Young Woman Wearing Dress</a></h3>
+    						<div class="d-flex">
+    							<div class="pricing">
+		    						<p class="price"><span>$120.00</span></p>
+		    					</div>
+		    					<div class="rating">
+	    							<p class="text-right">
+	    								<span class="ion-ios-star-outline"></span>
+	    								<span class="ion-ios-star-outline"></span>
+	    								<span class="ion-ios-star-outline"></span>
+	    								<span class="ion-ios-star-outline"></span>
+	    								<span class="ion-ios-star-outline"></span>
+	    							</p>
+	    						</div>
+	    					</div>
+	    					<hr>
+    						<p class="bottom-area d-flex">
+    							<a href="#" class="add-to-cart"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
+    							<a href="#" class="ml-auto"><span><i class="ion-ios-heart-empty"></i></span></a>
+    						</p>
+    					</div>
+    				</div>
+    			</div>
+    			<div class="col-sm col-md-6 col-lg-3 ftco-animate">
+    				<div class="product">
+    					<a href="#" class="img-prod"><img class="img-fluid" src="images/product-6.jpg" alt="Colorlib Template"></a>
+    					<div class="text py-3 px-3">
+    						<h3><a href="#">Young Woman Wearing Dress</a></h3>
+    						<div class="d-flex">
+    							<div class="pricing">
+		    						<p class="price"><span>$120.00</span></p>
+		    					</div>
+		    					<div class="rating">
+	    							<p class="text-right">
+	    								<span class="ion-ios-star-outline"></span>
+	    								<span class="ion-ios-star-outline"></span>
+	    								<span class="ion-ios-star-outline"></span>
+	    								<span class="ion-ios-star-outline"></span>
+	    								<span class="ion-ios-star-outline"></span>
+	    							</p>
+	    						</div>
+	    					</div>
+	    					<hr>
+    						<p class="bottom-area d-flex">
+    							<a href="#" class="add-to-cart"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
+    							<a href="#" class="ml-auto"><span><i class="ion-ios-heart-empty"></i></span></a>
+    						</p>
+    					</div>
+    				</div>
+    			</div>
+    			<div class="col-sm col-md-6 col-lg-3 ftco-animate">
+    				<div class="product">
+    					<a href="#" class="img-prod"><img class="img-fluid" src="images/product-7.jpg" alt="Colorlib Template"></a>
+    					<div class="text py-3 px-3">
+    						<h3><a href="#">Young Woman Wearing Dress</a></h3>
+    						<div class="d-flex">
+    							<div class="pricing">
+		    						<p class="price"><span>$120.00</span></p>
+		    					</div>
+		    					<div class="rating">
+	    							<p class="text-right">
+	    								<span class="ion-ios-star-outline"></span>
+	    								<span class="ion-ios-star-outline"></span>
+	    								<span class="ion-ios-star-outline"></span>
+	    								<span class="ion-ios-star-outline"></span>
+	    								<span class="ion-ios-star-outline"></span>
+	    							</p>
+	    						</div>
+	    					</div>
+	    					<hr>
+    						<p class="bottom-area d-flex">
+    							<a href="#" class="add-to-cart"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
+    							<a href="#" class="ml-auto"><span><i class="ion-ios-heart-empty"></i></span></a>
+    						</p>
+    					</div>
+    				</div>
+    			</div>
+    			<div class="col-sm col-md-6 col-lg-3 ftco-animate">
+    				<div class="product">
+    					<a href="#" class="img-prod"><img class="img-fluid" src="images/product-8.jpg" alt="Colorlib Template">
+    						<span class="status">Best Sellers</span>
+    					</a>
+    					<div class="text py-3 px-3">
+    						<h3><a href="#">Young Woman Wearing Dress</a></h3>
+    						<div class="d-flex">
+    							<div class="pricing">
+		    						<p class="price"><span>$120.00</span></p>
+		    					</div>
+		    					<div class="rating">
+	    							<p class="text-right">
+	    								<span class="ion-ios-star-outline"></span>
+	    								<span class="ion-ios-star-outline"></span>
+	    								<span class="ion-ios-star-outline"></span>
+	    								<span class="ion-ios-star-outline"></span>
+	    								<span class="ion-ios-star-outline"></span>
+	    							</p>
+	    						</div>
+	    					</div>
+	    					<hr>
+    						<p class="bottom-area d-flex">
+    							<a href="#" class="add-to-cart"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
+    							<a href="#" class="ml-auto"><span><i class="ion-ios-heart-empty"></i></span></a>
+    						</p>
+    					</div>
+    				</div>
+    			</div>
+                {% endif %}
+    		</div>
+    		<div class="row mt-5">
+          <div class="col text-center">
+            <div class="block-27">
+              <ul>
+                <li><a href="#">&lt;</a></li>
+                <li class="active"><span>1</span></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#">&gt;</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+    	</div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,290 @@
+{% extends 'Base.html' %}
+{% load static %}
+
+{% block title %}
+  <title>{{object.name}} | {{brand.full_name}}</title>
+{% endblock %}
+
+{% block react_script %}
+    <script type='text/babel'>
+      class ProductDetail extends React.Component{
+        state = {
+          Product : {},
+          Url : `${window.location.protocol}//${window.location.hostname}:${window.location.port}`,
+          loading : false,
+          selectedSublet : {},
+          displayProductImage : false,
+        }
+        style={
+          company_logo : {
+            height : '2em',
+            width : '2em',
+            objectFit : 'cover',
+            borderRadius : '50%',
+            
+          },
+          product_desc : {
+            fontSize : '1.2em',
+            padding : '1em;',
+            width : '20em',
+            
+          },
+          single_information:{
+            width : '60%',
+            display : 'block',
+            margin : 'auto',
+          },
+          single_offer:{
+            
+            display:'inline-block',
+            width : '15em',
+            padding : '1em',
+            margin : '1em',
+            border : '1px solid  grey',
+            
+          },
+          sublet_list:{
+            listStyleType : 'none',
+            padding:'0',
+          },
+          single_sublet:{
+            padding : '1em',
+            textTransform:'capitalize',
+            cursor : 'pointer',
+            color : '#f1b8c4',
+            border : '0.8px solid grey',
+            margin : '0.5em',
+            width : '50%',
+            textAlign : 'center',
+          },
+          selected_sublet:{
+            color : 'red',
+            border : '1px solid green',
+            margin : '0.5em',
+            width : '60%',
+            textAlign : 'center',
+            padding : '1em',
+            textTransform:'capitalize',
+          },
+          thumbnail : {
+            width : '3em',
+            margin : '2em',
+            cursor:'pointer',
+          },
+          display_product_image:{
+            display:'block',
+            margin : 'auto',
+            height : '40em',
+          },
+          max_retail_price:{
+            color : 'lightgrey',
+          },
+          selling_price:{
+            color : 'green'
+          },
+          button:{
+            borderRadius : '0',
+            height : '4em',
+            width : '35%',
+            margin : '2em'
+
+          }
+
+        }
+        componentWillMount = ()=>{
+          const product_id = {{object.id}};
+          const {Url} = this.state;
+          this.setState({loading:true});
+          axios.get(`${Url}/shop/api/product/${product_id}/details/`)
+            .then((response)=>{
+              this.setState({
+                Product:response.data,
+                loading:false,
+                selectedSublet:response.data.variants[0].sublets[0],
+                displayProductImage : response.data.variants[0].sublets[0].productimages[0],
+              });
+              
+
+            })
+            .catch((response , error)=>{
+              console.log(error);
+              alert(response.message);
+              this.setState({loading:false});
+            })
+          
+        }
+        selectSublet = (e)=>{
+          const sublet_id = parseInt(e.target.id);
+          const {Product} = this.state;
+          const {variants} = Product;
+          variants.forEach((variant)=>{
+            const s_index = variant.sublets.findIndex(i=>i.id===sublet_id);
+            if(s_index > -1){
+              this.setState({
+                selectedSublet:variant.sublets[s_index],
+                displayProductImage : variant.sublets[s_index].productimages[0],
+              })
+            }
+          })
+        }
+        selectDisplayImage = (e)=>{
+          const image_id = parseInt(e.target.id);
+          const {Product} = this.state;
+          const {variants} = Product;
+          variants.forEach((variant)=>{
+            variant.sublets.forEach((sublet)=>{
+              const i_index = sublet.productimages.findIndex(i=>i.id === image_id);
+              if(i_index>-1){
+                this.setState({displayProductImage : sublet.productimages[i_index]})
+              }
+            })
+          })
+        }
+        render = ()=>{
+          const {
+            Product,
+            loading,
+            selectedSublet,
+            displayProductImage,
+          } = this.state;
+          const {
+            company_logo,
+            product_desc,
+            single_information,
+            single_offer,
+            sublet_list,
+            single_sublet,
+            selected_sublet,
+            thumbnail,
+            display_product_image,
+            max_retail_price,
+            selling_price,
+            button,
+          } = this.style;
+          const {
+            informations , 
+            discountoffers,
+            variants,
+            reviews,
+            questions,
+            company,
+            category
+          } = Product;
+          if(loading){
+            return(
+              <h1 className='text-center '>Loading Product ....</h1>
+            )
+          }
+          return(
+            <div>
+              <div className='row'>
+                <div className='col-lg-5 pl-1'>
+                    <img src={displayProductImage.image_url} style={display_product_image}/>
+                    <br/>
+                    {typeof(selectedSublet.id) !=='undefined' && selectedSublet.productimages.map((image , i)=>{
+                      return(
+                        <img src={image.image_url} style={thumbnail} id={image.id} onClick={this.selectDisplayImage}/>
+                      );
+                    })}
+                    <br/>
+                    <button className='btn btn-success' style={button}><i className="fa fa-cart-plus" aria-hidden="true"></i> Add to Cart</button>
+                    <button className='btn btn-warning' style={button}><i class="fa fa-credit-card" aria-hidden="true"></i> Buy Now</button>
+                </div>
+                <div className='col-lg-7'>
+                    <h1>{Product.name} </h1>
+                    <h5><span className='badge badge-success'><img src={company.logo_url} style={company_logo}/>  {company.full_name}</span> <span className='badge badge-info'><img src={category.cover_image} style={company_logo}/>  {category.name}</span></h5>
+                    <br/>
+                    {
+                      typeof(selectedSublet.id) !=='undefined' 
+                      && <div className='row'>
+                            <div className='col-md-6'>
+                                <s><h3 style={max_retail_price}><i className="fa fa-inr" aria-hidden="true"></i> {selectedSublet.max_retail_price}</h3></s>
+                            </div>
+                            <div className='col-md-6'>
+                                <h3 style={selling_price}><i className="fa fa-inr" aria-hidden="true"></i> {selectedSublet.selling_price}</h3>
+                            </div>
+                        </div> 
+                    }
+                    <br/>
+                    <p style={product_desc}>{Product.description}</p>
+                    <hr/>
+                    {variants.map((variant , i)=>{
+                      return(
+                        <div key={i}>
+                            <h4>{variant.label}</h4>
+                            <ul style={sublet_list}>
+                              {variant.sublets.map((sublet , j)=>{
+                                return(
+                                  <li style={selectedSublet.id === sublet.id ? selected_sublet : single_sublet} key={j} id={sublet.id} onClick={this.selectSublet}>{sublet.value}</li>
+                                );
+                              })}
+                            </ul>
+                        </div>
+                      );
+                    })}
+                </div>
+              
+              </div>
+              <hr/>
+              <div>
+                  {informations.map((info , i)=>{
+                      if(info.image_url){
+                        return(
+                            <div style={single_information} key={i}>
+                              <div className='row'>
+                                
+                                <div className='col-md-4'>
+                                    <img src={info.image_url} />
+                                </div>
+                                <div className='col-md-8'>
+
+                                </div>
+                              </div>
+                            </div>
+                        )
+                      }else{
+                           return(
+                              <div style={single_information} key={i}>
+                                <h5 className='text-center'>{info.label}</h5>
+                                <p className='text-center'>{info.details}</p>
+                              </div>
+                          )
+                      }
+                     
+                    })}
+                    <hr/>
+                    {discountoffers.length >0 && <h2 className='text-center'>Discount Offers</h2>}
+                    {discountoffers.map((disoffer , i)=>{
+                      return(
+                        <div style={single_offer} key={i}>
+                          <h5>{disoffer.label}</h5>
+                          <p>{disoffer.details}</p>
+                        </div>
+                      )
+                    })}
+              </div>
+            </div>
+          );
+        }
+      }
+      ReactDOM.render(<ProductDetail/> , document.getElementById('product-detail'))
+    </script>
+{% endblock %}
+
+
+{% block content %}
+		<div class="hero-wrap hero-bread" style="background-image: url({{brand.random_hero_image}});">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+            <h1 class="mb-0 bread">{{product.name}}</h1>
+            <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span class="mr-2"><span>{{product.name}}</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br />
+    <br />
+		<div id='product-detail'></div>
+		
+{% endblock %}
