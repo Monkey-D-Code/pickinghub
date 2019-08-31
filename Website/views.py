@@ -25,3 +25,17 @@ class HomeView(TemplateView):
 class BrandDetails(RetrieveUpdateDestroyAPIView):
     serializer_class = BrandSerializer
     queryset = Brand.objects.all()
+
+class HeroImageList(ListCreateAPIView):
+    serializer_class = HeroImageSerializer
+    queryset = HeroImage.objects.all()
+
+    def get_queryset(self):
+        return self.queryset.filter(brand_id=self.kwargs.get('pk'))
+
+class HeroImageEdit(RetrieveUpdateDestroyAPIView):
+    serializer_class = HeroImageSerializer
+    queryset = HeroImage.objects.all()
+
+
+    

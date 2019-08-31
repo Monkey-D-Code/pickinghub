@@ -8,4 +8,7 @@ urlpatterns = [
 
     # api paths
     path('api/brand/<int:pk>/details/' , BrandDetails.as_view(),name='brand-details'),
+    path('api/brand/<int:pk>/hero-images/',HeroImageList.as_view(),name='hero-image-list'),
+    path('api/hero-image/<int:pk>/details/',HeroImageEdit.as_view(),name='hero-image-edit'),
+    
 ]

@@ -1,16 +1,6 @@
 class Website extends React.Component {
     state = {
-        id : 1,
-        full_name : '',
-        short_name : '',
-        foundation_date : '',
-        tag_line : '',
-        logo_url : '',
-        address : '',
-        contact_number : '',
-        gmap_src : '',
-        HeroImages : [],
-        NormalImages : [],
+        brand : {},
         Url : `${window.location.protocol}//${window.location.hostname}:${window.location.port}`,
     }
     style = {
@@ -25,26 +15,9 @@ class Website extends React.Component {
         const {Url} = this.state;
         axios.get(`${Url}/api/brand/1/details/`)
             .then((response)=>{
-                const {
-                    full_name,
-                    short_name,
-                    foundation_date,
-                    tag_line,
-                    logo_url,
-                    address,
-                    contact_number,
-                    gmap_src,
-
-                } = response.data;
+               
                 this.setState({
-                    full_name,
-                    short_name,
-                    foundation_date,
-                    tag_line,
-                    logo_url,
-                    address,
-                    contact_number,
-                    gmap_src,
+                    brand : response.data,
                 })
             })
             .catch((response,error)=>{
@@ -59,27 +32,24 @@ class Website extends React.Component {
           heading,
       } = this.style;
       const {
-        full_name,
-        short_name,
-        foundation_date,
-        tag_line,
-        logo_url,
-        address,
-        contact_number,
-        gmap_src,
+        brand,
         
       } = this.state;
+      
       return(
         <div style={website} className='row'>
          
-          <div className='col-md-6'>
-                <input 
-                    name='full_name' 
-                    className='form-control' 
-                    placeholder='Brand Full Name' 
-                />
+          <div className='col-md-4'>
+            <BrandEditForm 
+                brand={brand}
+            />
           </div>
-          <div className='col-md-6'>
+          <div className='col-md-4'>
+              <HeroImageEdit 
+                brand={brand}
+              />
+          </div>
+          <div className='col-md-4'>
 
           </div>
         </div>

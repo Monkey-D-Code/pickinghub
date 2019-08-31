@@ -8,9 +8,12 @@ from rest_framework.generics import (
     RetrieveAPIView,
 )
 from .serializers import *
+
+
 # Create your views here.
 class DepartmentDetailView(DetailView):
     model = Department
+    template_name = 'Shop/department_detail.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -21,6 +24,7 @@ class DepartmentDetailView(DetailView):
 
 class DemographicDetailView(DetailView):
     model = Demographic
+    template_name = 'Shop/demographic_detail.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -30,6 +34,7 @@ class DemographicDetailView(DetailView):
     
 class CategoryDetailView(DetailView):
     model = Category
+    template_name = 'Shop/category_detail.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -40,6 +45,7 @@ class CategoryDetailView(DetailView):
     
 class ProductDetailView(DetailView):
     model = Product
+    template_name = 'Shop/product_detail.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
