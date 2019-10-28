@@ -37,6 +37,21 @@
       .logo-image{
         width : 4em;
       }
+      .search-box{
+        position : fixed;
+        bottom : 4em;
+        right : 4em;
+        z-index : 999;
+        
+      }
+      .search-box input{
+        width : 20em;
+        padding : 0.5em;
+        border : 1px solid black;
+        -webkit-box-shadow: 3px 3px 19px -9px rgba(0,0,0,0.75);
+        -moz-box-shadow: 3px 3px 19px -9px rgba(0,0,0,0.75);
+        box-shadow: 3px 3px 19px -9px rgba(0,0,0,0.75);
+      }
     </style>
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
@@ -63,7 +78,7 @@
                 {% endif %}
               </div>
             </li>
-	          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+	          <li class="nav-item"><a href="{% url 'Website:about' %}" class="nav-link">About</a></li>
 	          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
 	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
             {% if request.user.is_authenticated %}
@@ -81,7 +96,9 @@
     <!-- END nav -->
 	{% block content %}{% endblock %}	
 		
-
+    <div class="search-box">
+      <input type="text" placeholder="Search Product" id="serach_box" />
+    </div>
     <footer class="ftco-footer bg-light ftco-section">
       <div class="container">
         <div class="row mb-5">
@@ -89,9 +106,9 @@
             <div class="ftco-footer-widget mb-4">
               <h2 class="ftco-heading-2">{{brand.full_name}}</h2>
               <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                <li class="ftco-animate"><a href="{{brand.facebook}}"><span class="icon-twitter"></span></a></li>
+                <li class="ftco-animate"><a href="{{brand.twitter}}"><span class="icon-facebook"></span></a></li>
+                <li class="ftco-animate"><a href="{{brand.instagram}}"><span class="icon-instagram"></span></a></li>
               </ul>
             </div>
           </div>
@@ -128,9 +145,9 @@
             	<h2 class="ftco-heading-2">Have a Questions?</h2>
             	<div class="block-23 mb-3">
 	              <ul>
-	                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
-	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
+	                <li><span class="icon icon-map-marker"></span><span class="text">{{brand.address}}</span></li>
+	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+91 {{brand.contact_number}}</span></a></li>
+	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">{{brand.email}}</span></a></li>
 	              </ul>
 	            </div>
             </div>

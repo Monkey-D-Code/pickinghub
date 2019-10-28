@@ -22,7 +22,12 @@ class BrandAdmin(admin.ModelAdmin):
         }),
         ("Information" , {
             "fields" : (
-                "foundation_date","tag_line","logo_url","address","contact_number","gmap_src",
+                "foundation_date","tag_line","logo_url","email","address","about","contact_number","gmap_src",
+            ),
+        }),
+        ("Social Media Links" , {
+            "fields" : (
+                "facebook","twitter","instagram",
             ),
         }),
     )
