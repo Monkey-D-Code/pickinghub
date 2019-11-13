@@ -8,7 +8,15 @@ from rest_framework.generics import (
     RetrieveAPIView,
 )
 from .serializers import *
-
+from rest_framework.views import (
+    APIView,
+    
+)
+from rest_framework.generics import (
+    ListAPIView,
+)
+from rest_framework.response import Response
+from rest_framework import status
 
 # Create your views here.
 class DepartmentDetailView(DetailView):
@@ -57,3 +65,21 @@ class ProductDetailView(DetailView):
 class ProductDetailApiView(RetrieveAPIView):
     serializer_class = ProductDetailsSerializer
     queryset = Product.objects.all()
+
+
+class TrendingProducts(ListAPIView):
+    serializer_class = ProductSerializer
+    queryset = Product.objects.all()
+
+    def get_queryset(self):
+        return self.queryset.filter(trending=True)
+
+class CategoryWiseProductsAPIView(ListAPIView):
+    serializer_class = CategorySerializer
+    queryset = Category.objects.all()
+    
+
+class SearchResultApiView(APIView):
+    def post(self,request):
+        print(request)
+        return Response({'foo':'bar'})

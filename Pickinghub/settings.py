@@ -29,8 +29,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'nested_admin',
-    'rest_framework.authtoken',
     'rest_framework',
+    'rest_framework.authtoken',
+    
     'widget_tweaks',
     'corsheaders',
     'Accounts',
@@ -79,8 +80,10 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-CROSS_ORIGIN_ALLOW_ALL = True
-
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_WISHLIST = [
+    'localhost:3000'
+]
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 

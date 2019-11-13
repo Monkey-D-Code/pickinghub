@@ -63,6 +63,10 @@ class Category(models.Model):
 
         return products
 
+    @property
+    def all_products(self):
+        return self.product_set.all()
+
 class Company(models.Model):
     category = models.ManyToManyField(Category)
     full_name = models.CharField(max_length=50, unique=True)
@@ -86,7 +90,7 @@ class Product(models.Model):
     name = models.CharField(max_length=250 , unique=True)
     slug = models.SlugField()
     description = models.TextField()
-
+    trending = models.BooleanField(default=False)
     warranty = models.CharField(blank=True , max_length=120)
     support = models.CharField(blank=True , max_length=120)
 

@@ -1,4 +1,7 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import (
+    ModelSerializer,
+    URLField,
+)
 from .models import *
 
 class ProductImageSerializer(ModelSerializer):
@@ -51,3 +54,19 @@ class ProductDetailsSerializer(ModelSerializer):
         model = Product
         fields = '__all__'
         depth = 1
+
+
+
+class ProductSerializer(ModelSerializer):
+    random_product_image = URLField()
+    class Meta:
+        model = Product
+        fields = '__all__'
+        depth=1
+
+
+class CategorySerializer(ModelSerializer):
+    all_products = ProductSerializer(many=True)
+    class Meta:
+        model = Category
+        fields = '__all__'

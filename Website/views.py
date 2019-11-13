@@ -12,7 +12,7 @@ from rest_framework.generics import (
 from .serializers import *
 # Create your views here.
 class HomeView(TemplateView):
-    template_name = 'Website/home.html'
+    template_name = 'pickinghub-ui.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

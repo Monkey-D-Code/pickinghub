@@ -182,7 +182,7 @@ class ProductAdmin(admin.ModelAdmin):
         }),
         ("Information" , {
             "fields":(
-                "name","slug","description","warranty","support"
+                "name","slug","description","warranty","support","trending"
             )
         }),
         ("Time" , {
