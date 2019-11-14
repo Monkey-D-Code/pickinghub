@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import axios from 'axios';
+import {NavLink} from 'react-router-dom';
 
 class Categories extends Component{
 
@@ -23,6 +24,7 @@ class Categories extends Component{
         single_product:{
             border:'2px solid #F7D4DC',
             padding:'0.5em',
+            margin:'0.5em',
             cursor:'pointer',
         },
         product_image:{
@@ -81,8 +83,11 @@ class Categories extends Component{
                                     ? cat.all_products.map((p,j)=>{
                                         return(
                                             <div key={j} style={single_product} className='col-md-3'>
-                                                <img src={p.random_product_image} style={product_image}/>
-                                                <h4>{p.name}</h4>
+                                                <NavLink to={`/product/${p.id}`}>
+                                                    <img src={p.random_product_image} style={product_image}/>
+                                                    <h4>{p.name}</h4>
+                                                </NavLink>
+                                                
                                             </div>
                                         );
                                     })

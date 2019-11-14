@@ -28,21 +28,24 @@ class NavBar extends Component{
                 <div className="collapse navbar-collapse" id="ftco-nav">
                     <ul className="navbar-nav ml-auto">
                     <li className="nav-item active"><a href="#" className="nav-link">Home</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown04">
-                            <a class="dropdown-item" href="shop.html">Shop</a>
-                            <a class="dropdown-item" href="product-single.html">Single Product</a>
-                            <a class="dropdown-item" href="cart.html">Cart</a>
-                            <a class="dropdown-item" href="checkout.html">Checkout</a>
+                    <li className="nav-item dropdown">
+                        <a className="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
+                        <div className="dropdown-menu" aria-labelledby="dropdown04">
+                            <a className="dropdown-item" href="shop.html">Shop</a>
+                            <a className="dropdown-item" href="product-single.html">Single Product</a>
+                            <a className="dropdown-item" href="cart.html">Cart</a>
+                            <a className="dropdown-item" href="checkout.html">Checkout</a>
                         </div>
                     </li>
                     <li className="nav-item"><a href="#" className="nav-link">About</a></li>
                     
                     <li className="nav-item"><a href="contact.html" className="nav-link">Contact</a></li>
+                    {this.props.loggedIn() 
+                        ?   <li className="nav-item"><a href="#" className="nav-link"><i className="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
+                        :   <li className="nav-item"><a href="#" className="nav-link"><i className="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
+                    }
                     
-                    <li className="nav-item"><a href="#" className="nav-link"><i className="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
-                    <li className="nav-item"><a href="#" className="nav-link"><i className="fa fa-user-plus" aria-hidden="true"></i> Register</a></li>
+                    {!this.props.loggedIn() && <li className="nav-item"><a href="#" className="nav-link"><i className="fa fa-user-plus" aria-hidden="true"></i> Register</a></li>}
                     
 
                     </ul>

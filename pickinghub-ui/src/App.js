@@ -6,6 +6,7 @@ import './App.css';
 
 // importing pages
 import Home from './pages/home';
+import ProductDetails from './pages/product_detail';
 
 // importing components
 import NavBar from './components/Navbar';
@@ -44,6 +45,14 @@ class App extends Component {
       })
   }
 
+  loggedIn = ()=>{
+    const {Customer,Admin} = this.state;
+    if(Customer || Admin){
+      return true;
+    }
+    return false;
+  }
+
 
 
   render =()=>{
@@ -56,6 +65,7 @@ class App extends Component {
         <Router>
           <NavBar 
             Brand={Brand}
+            loggedIn={this.loggedIn}
           />
           <Switch>
             <Route exact path='/'> 
@@ -64,6 +74,15 @@ class App extends Component {
                 ajaxUrl={ajaxUrl}
               />
             </Route>
+            <Route exact path='/product/:id' 
+              children={<ProductDetails
+                ajaxUrl={ajaxUrl}
+                Brand={Brand}
+                loggedIn={this.loggedIn}
+              />}
+            /> 
+              
+            
           </Switch>
           <Footer
             Brand={Brand}
