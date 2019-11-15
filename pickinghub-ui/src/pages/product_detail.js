@@ -172,7 +172,10 @@ class ProductDetails extends Component{
         }
         return(
             <div>
-                <div class="hero-wrap hero-bread" style={{backgroundImage: `url(${Brand.random_hero_image})`}}>
+                <div class="hero-wrap hero-bread" style={{
+                  backgroundImage: `url(${Brand.random_hero_image})`,
+                  marginTop:'8em'
+                  }}>
                     <div class="container">
                         <div class="row no-gutters slider-text align-items-center justify-content-center">
                         <div class="col-md-9 ftco-animate text-center">
@@ -182,6 +185,8 @@ class ProductDetails extends Component{
                         </div>
                     </div>
                 </div>
+                <br/>
+                <br/>
               <div className='row'>
                 <div className='col-lg-5 pl-1'>
                     <img src={displayProductImage.image_url} style={display_product_image}/>

@@ -1,12 +1,18 @@
 import React,{Component} from 'react';
-import {BrowserRouter as Router,Switch,Route} from 'react-router-dom';
+import {BrowserRouter as Router,Switch,Route,withRouter} from 'react-router-dom';
 import axios from 'axios';
+import cookie from 'react-cookies';
 import './App.css';
 
 
 // importing pages
 import Home from './pages/home';
+import Login from './pages/login';
 import ProductDetails from './pages/product_detail';
+import Register from './pages/register';
+import Profile from './pages/profile';
+import Contact from './pages/contact';
+import About from './pages/about';
 
 // importing components
 import NavBar from './components/Navbar';
@@ -26,8 +32,25 @@ class App extends Component {
 
   componentWillMount=()=>{
     this.getBrand();
+    const token = cookie.load('sasuke');
+    if(token && !this.loggedIn()){
+      axios.post(`${this.state.ajaxUrl}/accounts/api/customer-from-token/`,{token})
+        .then(response=>{
+          this.setState({
+            Customer:response.data
+          })
+        })
+        .catch(err=>{
+          console.log(err);
+          alert(JSON.stringify(err.response.data));
+        })
+    }
   }
-
+  setCustomer = (customer)=>{
+    this.setState({
+      Customer:customer
+    })
+  }
 
   getBrand=()=>{
     const {ajaxUrl} = this.state;
@@ -53,10 +76,19 @@ class App extends Component {
     return false;
   }
 
-
+  loginCustomer = (customer)=>{
+    this.setState({Customer:customer});
+  }
+  logout = ()=>{
+    cookie.remove('sasuke');
+    this.setState({
+      Customer:false,
+    });
+    
+  }
 
   render =()=>{
-    const{loading,Brand,ajaxUrl} = this.state;
+    const{loading,Brand,ajaxUrl,Customer} = this.state;
     if(loading){
       return <Loader/>;
     }
@@ -81,8 +113,39 @@ class App extends Component {
                 loggedIn={this.loggedIn}
               />}
             /> 
-              
-            
+            <Route exact path='/login'>
+              <Login 
+                ajaxUrl={ajaxUrl}
+                Brand={Brand}
+                
+              />
+            </Route>
+            <Route exact path='/register'>
+              <Register 
+                ajaxUrl={ajaxUrl}
+                Brand={Brand}
+              />
+            </Route>
+            <Route exact path='/profile'>
+              <Profile 
+                ajaxUrl={ajaxUrl}
+                Brand={Brand}
+                loggedIn={this.loggedIn}
+                setCustomer={this.setCustomer}
+                Customer={Customer}
+                logout={this.logout}
+              />
+            </Route>
+            <Route exact path='/contact'>
+              <Contact 
+                Brand={Brand}
+              />
+            </Route>
+            <Route exact path='/about'>
+              <About 
+                Brand={Brand}
+              />
+            </Route>
           </Switch>
           <Footer
             Brand={Brand}

@@ -1,4 +1,5 @@
 import React,{Component} from 'react';
+import {NavLink} from 'react-router-dom';
 
 class NavBar extends Component{
     style = {
@@ -18,16 +19,16 @@ class NavBar extends Component{
         return(
             <nav className="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
                 <div className="container">
-                <a className="navbar-brand" href="/">
-                <img src={logo_url} style={logo_img} />
-                </a>
+                <NavLink className="navbar-brand" to="/">
+                    <img src={logo_url} style={logo_img} />
+                </NavLink>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="oi oi-menu"></span> Menu
                 </button>
 
                 <div className="collapse navbar-collapse" id="ftco-nav">
                     <ul className="navbar-nav ml-auto">
-                    <li className="nav-item active"><a href="#" className="nav-link">Home</a></li>
+                    <li className="nav-item"><NavLink to='/' className="nav-link">Home</NavLink></li>
                     <li className="nav-item dropdown">
                         <a className="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
                         <div className="dropdown-menu" aria-labelledby="dropdown04">
@@ -37,15 +38,15 @@ class NavBar extends Component{
                             <a className="dropdown-item" href="checkout.html">Checkout</a>
                         </div>
                     </li>
-                    <li className="nav-item"><a href="#" className="nav-link">About</a></li>
+                    <li className="nav-item"><NavLink to="/about" className="nav-link">About</NavLink></li>
                     
-                    <li className="nav-item"><a href="contact.html" className="nav-link">Contact</a></li>
+                    <li className="nav-item"><NavLink to="/contact" className="nav-link">Contact</NavLink></li>
                     {this.props.loggedIn() 
-                        ?   <li className="nav-item"><a href="#" className="nav-link"><i className="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
-                        :   <li className="nav-item"><a href="#" className="nav-link"><i className="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
+                        ?   <li className="nav-item"><NavLink to="/profile" className="nav-link"><i className="fa fa-sign-in" aria-hidden="true"></i> Profile</NavLink></li>
+                        :   <li className="nav-item"><NavLink to="/login" className="nav-link"><i className="fa fa-sign-in" aria-hidden="true"></i> Login</NavLink></li>
                     }
                     
-                    {!this.props.loggedIn() && <li className="nav-item"><a href="#" className="nav-link"><i className="fa fa-user-plus" aria-hidden="true"></i> Register</a></li>}
+                    {!this.props.loggedIn() && <li className="nav-item"><NavLink to="/register" className="nav-link"><i className="fa fa-user-plus" aria-hidden="true"></i> Register</NavLink></li>}
                     
 
                     </ul>

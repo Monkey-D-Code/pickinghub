@@ -3,6 +3,7 @@ from .views import *
 from django.contrib.auth.views import (
     LogoutView,
 )
+from rest_framework.authtoken import views
 
 app_name = 'Accounts'
 
@@ -13,7 +14,9 @@ urlpatterns = [
     path('signup/', SignupView.as_view(),name='signup'),
 
     # api
+    path('api/auth-token/',views.obtain_auth_token),
     path('api/customer-register/',CustomerRegisterView.as_view(),name='customer-register'),
     path('api/<int:pk>/get-profile/' , CustomerDetailsView.as_view(),name='get-profile'),
     path('api/<int:pk>/get-master/' , MasterDetailsView.as_view(),name='get-master'),
+    path('api/customer-from-token/',CustomerFromToken.as_view(),name='get-customer'),
 ]

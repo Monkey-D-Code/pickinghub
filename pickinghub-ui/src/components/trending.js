@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import axios from 'axios';
+import {withRouter,NavLink} from 'react-router-dom';
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
@@ -67,9 +68,9 @@ class Trending extends Component{
                             >
                                 {TrendingProducts.map((product,i)=>{
                                     return(
-                                        <div style={trending_product}>
+                                        <div style={trending_product} key={i}>
                                             <img src={product.random_product_image} style={trending_image} alt={`${product.name}`}/>
-                                            <p className="legend">{product.name}</p>
+                                            <NavLink className="legend" to={`/product/${product.id}`}>{product.name}</NavLink>
                                         </div>
                                     );
                                 })}
@@ -83,4 +84,4 @@ class Trending extends Component{
     }
 }
 
-export default Trending;
+export default withRouter(Trending);

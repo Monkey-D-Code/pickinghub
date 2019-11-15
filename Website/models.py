@@ -26,7 +26,17 @@ class Brand(models.Model):
         return self.heroimage_set.all()[randrange(0,self.heroimage_set.count())].image_url    
     @property
     def random_normal_image(self):
-        return self.normalimage_set.all()[randrange(0,self.normalimage_set.count())].image_url    
+        return self.normalimage_set.all()[randrange(0,self.normalimage_set.count())].image_url 
+
+    @property
+    def terms_conditions(self):
+        return self.termcondition_set.all() 
+    @property
+    def privacy_policy(self):
+        return self.privacypolicy_set.all() 
+    @property
+    def return_policy(self):
+        return self.returnpolicy_set.all() 
 
 class HeroImage(models.Model):
     brand  = models.ForeignKey(Brand , on_delete=models.CASCADE)
@@ -45,3 +55,34 @@ class NormalImage(models.Model):
     def __str__(self):
         return self.caption
     
+
+class TermCondition(models.Model):
+    brand = models.ForeignKey(Brand , on_delete=models.CASCADE)
+    label = models.CharField(max_length=50)
+    desc = models.TextField()
+
+    def __str__(self):
+        return self.label
+
+
+class PrivacyPolicy(models.Model):
+    brand = models.ForeignKey(Brand , on_delete=models.CASCADE)
+    label = models.CharField(max_length=50)
+    desc = models.TextField()
+
+    def __str__(self):
+        return self.label
+
+    class Meta:
+        verbose_name_plural = 'Privacy Policies'
+
+class ReturnPolicy(models.Model):
+    brand = models.ForeignKey(Brand , on_delete=models.CASCADE)
+    label = models.CharField(max_length=50)
+    desc = models.TextField()
+
+    def __str__(self):
+        return self.label
+
+    class Meta:
+        verbose_name_plural = 'Return Policies'

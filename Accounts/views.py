@@ -13,7 +13,12 @@ from Shop.models import Department
 from django.views.generic import (
     TemplateView,
 )
-
+from rest_framework.views import (
+    APIView,
+)
+from rest_framework.response import (
+    Response
+)
 from .serializers import *
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
@@ -69,3 +74,13 @@ class CustomerDetailsView(RetrieveUpdateDestroyAPIView):
 class MasterDetailsView(RetrieveUpdateDestroyAPIView):
     queryset = Master.objects.all()
     serializer_class = MasterSerializer
+
+
+class CustomerFromToken(APIView):
+    def post(self,request):
+        token_key = request.data["token"]
+        token = Token.objects.get(key=token_key)
+        user = User.objects.get(id=token.user_id)
+        customer = Customer.objects.get(user=user)
+        serializer = CustomerDetailsSerializer(customer)
+        return Response(serializer.data)

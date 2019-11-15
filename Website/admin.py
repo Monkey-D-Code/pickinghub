@@ -10,10 +10,29 @@ class NormalImageInline(admin.TabularInline):
     model = NormalImage
     extra = 3
 
+class TermConditionInline(admin.TabularInline):
+    model = TermCondition
+    extra = 1
+
+class PrivacyPolicyInline(admin.TabularInline):
+    model = PrivacyPolicy
+    extra = 1
+
+class ReturnPolicyInline(admin.TabularInline):
+    model = ReturnPolicy
+    extra = 1
+
+
 
 @admin.register(Brand)
 class BrandAdmin(admin.ModelAdmin):
-    inlines = [HeroImageInline , NormalImageInline]
+    inlines = [
+        HeroImageInline , 
+        NormalImageInline,
+        TermConditionInline,
+        PrivacyPolicyInline,
+        ReturnPolicyInline
+    ]
     fieldsets = (
         ("Name", {
             "fields": (
