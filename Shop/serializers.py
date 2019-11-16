@@ -4,6 +4,13 @@ from rest_framework.serializers import (
 )
 from .models import *
 
+class DepartmentSerializer(ModelSerializer):
+    class Meta:
+        model = Department
+        fields = '__all__'
+
+
+
 class ProductImageSerializer(ModelSerializer):
     class Meta:
         model = ProductImage
@@ -69,4 +76,18 @@ class CategorySerializer(ModelSerializer):
     all_products = ProductSerializer(many=True)
     class Meta:
         model = Category
+        fields = '__all__'
+
+class DemographicSerializer(ModelSerializer):
+    categories = CategorySerializer(many=True)
+    class Meta:
+        model = Demographic
+        fields = '__all__'
+
+
+class DepartmentDetailSerializer(ModelSerializer):
+    demographics = DemographicSerializer(many=True)
+    class Meta:
+        
+        model = Department
         fields = '__all__'

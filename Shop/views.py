@@ -14,6 +14,7 @@ from rest_framework.views import (
 )
 from rest_framework.generics import (
     ListAPIView,
+    ListCreateAPIView,
 )
 from rest_framework.response import Response
 from rest_framework import status
@@ -83,3 +84,14 @@ class SearchResultApiView(APIView):
     def post(self,request):
         print(request)
         return Response({'foo':'bar'})
+
+
+class DepartmentListAPIView(ListCreateAPIView):
+    serializer_class = DepartmentSerializer
+    queryset = Department.objects.all()
+
+class DepartmentDetailApiView(RetrieveAPIView):
+    serializer_class = DepartmentDetailSerializer
+    queryset = Department.objects.all()
+
+    

@@ -10,6 +10,10 @@ urlpatterns = [
     path('product/<int:pk>/' , ProductDetailView.as_view() , name='product-details'),
 
     # API view
+    path('api/department/list/',DepartmentListAPIView.as_view()),
+    path('api/department/<int:pk>/',DepartmentDetailApiView.as_view()),
+
+
     path('api/product/<int:pk>/details/',ProductDetailApiView.as_view()),
     path('api/trending-products/',TrendingProducts.as_view()),
     path('api/category-wise-products/',CategoryWiseProductsAPIView.as_view()),

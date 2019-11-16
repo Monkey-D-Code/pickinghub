@@ -15,6 +15,10 @@ class Department(models.Model):
 
      def __str__(self):
          return self.name
+
+     @property
+     def demographics(self):
+        return self.demographic_set.all()
      
 
 
@@ -30,6 +34,10 @@ class Demographic(models.Model):
 
     def __str__(self):
          return self.name
+
+    @property
+    def categories(self):
+        return self.category_set.all()
 
     @property
     def total_companies(self):

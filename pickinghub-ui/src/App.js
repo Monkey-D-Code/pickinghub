@@ -13,11 +13,14 @@ import Register from './pages/register';
 import Profile from './pages/profile';
 import Contact from './pages/contact';
 import About from './pages/about';
+import DepartmentDetail from './pages/department_detail';
 
 // importing components
 import NavBar from './components/Navbar';
 import Footer from './components/footer';
 import Loader from './components/loader';
+import Departments from './components/departments';
+
 
 class App extends Component {
   state = {
@@ -146,7 +149,18 @@ class App extends Component {
                 Brand={Brand}
               />
             </Route>
+            <Route exact path='/department/:id' 
+              children={<DepartmentDetail
+                ajaxUrl={ajaxUrl}
+                Brand={Brand}
+                loggedIn={this.loggedIn}
+              />}
+            /> 
           </Switch>
+          <Departments 
+            ajaxUrl={ajaxUrl}
+            Brand={Brand}
+          />
           <Footer
             Brand={Brand}
           />
