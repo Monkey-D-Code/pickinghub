@@ -78,7 +78,10 @@ class TrendingProducts(ListAPIView):
 class CategoryWiseProductsAPIView(ListAPIView):
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
-    
+
+class CategoryDetailAPIView(RetrieveAPIView):
+    serializer_class = CategorySerializer
+    queryset = Category.objects.all()
 
 class SearchResultApiView(APIView):
     def post(self,request):

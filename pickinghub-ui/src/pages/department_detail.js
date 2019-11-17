@@ -156,9 +156,9 @@ class DepartmentDetail extends Component{
                                                 return(
                                                     <div className="col-md-4 col-sm-6">
                                                         <div style={single_cate} className="card" key={j}>
-                                                            <img src={cate.cover_image} style={{width:'100%'}}/>
+                                                            <NavLink to={`/category/${cate.id}`}><img src={cate.cover_image} style={{width:'100%'}}/></NavLink>
                                                             <div className='card-body'>
-                                                                <h3 className='card-title'>{cate.name}</h3>
+                                                                <h3 className='card-title'><NavLink to={`/category/${cate.id}`}>{cate.name}</NavLink></h3>
                                                                 <p className='card-text'>{cate.desc}</p>
                                                             </div>
                                                         </div>

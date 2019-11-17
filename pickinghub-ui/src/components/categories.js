@@ -76,7 +76,7 @@ class Categories extends Component{
                 {Categories.map((cat,i)=>{
                     return(
                         <div key={i} className='container'>
-                            <h3 style={{color:'#F7D4DC'}}><img src={cat.cover_image} style={category_thumb} alt={`${cat.name}`}/> {cat.name}</h3>
+                            <h3 style={{color:'#F7D4DC'}}><NavLink to={`/category/${cat.id}`}><img src={cat.cover_image} style={category_thumb} alt={`${cat.name}`}/> {cat.name}</NavLink></h3>
                             <hr/>
                             <div style={products_list} className='row'>
                                 {cat.all_products.length > 0

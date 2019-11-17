@@ -14,6 +14,7 @@ import Profile from './pages/profile';
 import Contact from './pages/contact';
 import About from './pages/about';
 import DepartmentDetail from './pages/department_detail';
+import CategoryDetail from './pages/category_detail';
 
 // importing components
 import NavBar from './components/Navbar';
@@ -151,6 +152,13 @@ class App extends Component {
             </Route>
             <Route exact path='/department/:id' 
               children={<DepartmentDetail
+                ajaxUrl={ajaxUrl}
+                Brand={Brand}
+                loggedIn={this.loggedIn}
+              />}
+            /> 
+            <Route exact path='/category/:id' 
+              children={<CategoryDetail
                 ajaxUrl={ajaxUrl}
                 Brand={Brand}
                 loggedIn={this.loggedIn}
