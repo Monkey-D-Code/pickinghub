@@ -70,7 +70,8 @@ class ProductDetails extends Component{
         display_product_image:{
           display:'block',
           margin : 'auto',
-          height : '40em',
+          
+          width:'80%',
         },
         max_retail_price:{
           color : 'lightgrey',

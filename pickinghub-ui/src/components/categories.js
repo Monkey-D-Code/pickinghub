@@ -28,9 +28,11 @@ class Categories extends Component{
             cursor:'pointer',
         },
         product_image:{
-            height : '15em',
+            
             display:'block',
-            margin:'auto'
+            margin:'auto',
+            width:'100%',
+            objectFit:'cover'
         }
     }
 
