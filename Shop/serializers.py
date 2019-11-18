@@ -73,6 +73,7 @@ class ProductSerializer(ModelSerializer):
 
 
 class CategorySerializer(ModelSerializer):
+    
     all_products = ProductSerializer(many=True)
     class Meta:
         model = Category

@@ -72,6 +72,10 @@ class Category(models.Model):
         return products
 
     @property
+    def five_products(self):
+        return self.product_set.all()[:5]
+
+    @property
     def all_products(self):
         return self.product_set.all()
 

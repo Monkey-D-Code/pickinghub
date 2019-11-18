@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import {withRouter,NavLink} from 'react-router-dom';
 import axios from 'axios';
-
+import cookie from 'react-cookies'
 
 class Register extends Component{
     state = {
@@ -125,11 +125,33 @@ class Register extends Component{
                 },
                 middle_name,
             }
-            axios.post(`${ajaxUrl}/accounts/api/customer-register/`,data)
+            axios.post(
+                    `${ajaxUrl}/accounts/api/customer-register/`,
+                    data,
+                    {"X-CSRFToken":cookie.load('csrftoken')}   
+                )
                 .then((response)=>{
-                    console.log(response.data)
-                    this.setState({loading:false})
-                    this.props.history.push('/profile');
+                    console.log(response.data);
+                    // logging customer in
+                    axios.post(
+                        `${ajaxUrl}/accounts/api/auth-token/`,
+                        {username,password},
+                        {"X-CSRFToken":cookie.load('csrftoken')}
+                        )
+                        .then(response=>{
+                            console.log(response.data);
+                            cookie.save('sasuke',response.data.token);
+                            this.props.history.push('/profile');
+                        })
+                        .catch((err)=>{
+                            console.log(err);
+                            this.setState({
+                                serverMessage:JSON.stringify(err.response.data.non_field_errors),
+                                loading:false,
+                            })
+                                
+                        })
+                    
                     
                 })
                 .catch((response)=>{

@@ -44,7 +44,11 @@ class Login extends Component{
         }else{
             this.setState({loading:true});
             const {ajaxUrl} = this.props;
-            axios.post(`${ajaxUrl}/accounts/api/auth-token/`,{username,password})
+            axios.post(
+                `${ajaxUrl}/accounts/api/auth-token/`,
+                {username,password},
+                {"X-CSRFToken":cookie.load('csrftoken')}
+                )
                 .then(response=>{
                     console.log(response.data);
                     cookie.save('sasuke',response.data.token);
@@ -56,9 +60,7 @@ class Login extends Component{
                         serverMessage:JSON.stringify(err.response.data.non_field_errors),
                         loading:false,
                     })
-                    
-                    
-
+                        
                 })
         }
         
