@@ -125,6 +125,8 @@ class Register extends Component{
                 },
                 middle_name,
             }
+            axios.defaults.xsrfHeaderName = "X-CSRFToken"
+            axios.defaults.xsrfCookieName = 'csrftoken'
             axios.post(
                     `${ajaxUrl}/accounts/api/customer-register/`,
                     data,
@@ -133,10 +135,12 @@ class Register extends Component{
                 .then((response)=>{
                     console.log(response.data);
                     // logging customer in
+                    axios.defaults.xsrfHeaderName = "X-CSRFToken"
+                    axios.defaults.xsrfCookieName = 'csrftoken'
                     axios.post(
-                        `${ajaxUrl}/accounts/api/auth-token/`,
-                        {username,password},
-                        {"X-CSRFToken":cookie.load('csrftoken')}
+                            `${ajaxUrl}/accounts/api/auth-token/`,
+                            {username,password},
+                            {"X-CSRFToken":cookie.load('csrftoken')}
                         )
                         .then(response=>{
                             console.log(response.data);

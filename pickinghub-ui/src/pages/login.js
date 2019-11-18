@@ -44,6 +44,8 @@ class Login extends Component{
         }else{
             this.setState({loading:true});
             const {ajaxUrl} = this.props;
+            axios.defaults.xsrfHeaderName = "X-CSRFToken"
+            axios.defaults.xsrfCookieName = 'csrftoken'
             axios.post(
                 `${ajaxUrl}/accounts/api/auth-token/`,
                 {username,password},
