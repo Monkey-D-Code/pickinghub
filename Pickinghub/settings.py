@@ -14,7 +14,7 @@ STATIC_DIR = os.path.join(BASE_DIR , 'static')
 SECRET_KEY = '8h2$+r$o60=dhr_bt1-cdrvz0li!*&9#xnbpc_mhg$m*)%blw)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['pickinghub.pythonanywhere.com']
 
