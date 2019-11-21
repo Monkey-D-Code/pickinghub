@@ -1,6 +1,8 @@
 from rest_framework.serializers import (
     ModelSerializer,
     URLField,
+    DecimalField,
+    BooleanField
 )
 from .models import *
 
@@ -92,3 +94,27 @@ class DepartmentDetailSerializer(ModelSerializer):
         
         model = Department
         fields = '__all__'
+
+
+class SingleOrderSerializer(ModelSerializer):
+    total = DecimalField(max_digits=9,decimal_places=2)
+    class Meta:
+        model = SingleOrder
+        fields = '__all__'
+
+
+class OrderSerializer(ModelSerializer):
+    sum = DecimalField(max_digits=9,decimal_places=2)
+    orders = SingleOrderSerializer(many=True)
+    class Meta:
+        model = Order
+        fields = '__all__'
+
+
+class SpecialDealSerializer(ModelSerializer):
+    has_expired = BooleanField()
+    products = ProductSerializer(many=True)
+    class Meta:
+        model = SpecialDeal
+        fields = '__all__'
+

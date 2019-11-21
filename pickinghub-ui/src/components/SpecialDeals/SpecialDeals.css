@@ -1,0 +1,40 @@
+.discount{
+    background-color: rgb(240, 68, 231);
+    padding : 0.6em;
+    border-radius: 0.3em;
+    width : fit-content;
+    
+    text-transform: uppercase;
+    font-weight: bold;
+    color: rgb(255, 242, 58);
+    -webkit-box-shadow: 4px 9px 19px -8px rgba(133,36,133,1);
+    -moz-box-shadow: 4px 9px 19px -8px rgba(133,36,133,1);
+    box-shadow: 4px 9px 19px -8px rgba(133,36,133,1);
+}
+
+.product-name{
+    color:rgb(213, 22, 219);
+    border-top : 1px solid rgba(216, 99, 240, 0.795);
+    border-bottom : 1px solid  rgba(216, 99, 240, 0.795);
+    margin: 0.2em 0 0.2em 0;
+}
+
+.deal-title{
+    
+    clip-path: polygon(0% 0%, 60% 0%, 100% 50%, 60% 100%, 0% 100%);
+    -moz-clip-path: polygon(0% 0%, 60% 0%, 100% 50%, 60% 100%, 0% 100%);
+    -webkit-clip-path: polygon(0% 0%, 60% 0%, 100% 50%, 60% 100%, 0% 100%);
+}
+
+.product-desc{
+    color: rgb(142, 185, 24);
+}
+
+.deal-desc{
+    width : 80%;
+    border : 2px solid rgb(196, 14, 187);
+    padding : 0.6em;
+    border-radius: 0.5em;
+    margin-top : 1em;
+    color: white;
+}

@@ -1,0 +1,46 @@
+.cart-btn{
+    height:4.5em;
+    width:4.5em;
+    border-radius: 50%;
+    background-color: rgba(60, 240, 75, 0.877);
+    position: fixed;
+    right: 1.5em;
+    bottom: 6em;
+    cursor: pointer;
+    outline: none;
+    border: 1px solid rgb(26, 135, 224);
+    color: rgb(139, 42, 158);
+    z-index: 88;
+}
+
+.cart-btn:hover{
+    border: 1px solid rgb(139, 42, 158);
+    color: white;
+}
+
+.cart-body{
+    width : 20em;
+    height: 32em;
+    position: fixed;
+    right: 7em;
+    bottom: 1em;
+    border-radius: 0.5em;
+    background-color: #FFCB47;
+    z-index: 88;
+    display: block;
+    overflow: auto;
+}
+
+
+@media only screen and (max-width: 360px){
+    .cart-body{
+        width : 90vw;
+        height : 75vh;
+        right: 2em;
+        bottom: 6em;
+    }
+    .cart-btn{
+        bottom: 1em;
+        right: 7em;
+    }
+}

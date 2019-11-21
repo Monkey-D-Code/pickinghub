@@ -5,6 +5,7 @@ import Header from '../components/header';
 import Trending from '../components/trending';
 import Intro from '../components/intro';
 import Categories from '../components/categories';
+import SpecialDeals from '../components/SpecialDeals/SpecialDeals';
 
 class Home extends Component{
 
@@ -20,6 +21,10 @@ class Home extends Component{
                 />
                 <Intro 
                     Brand={this.props.Brand}
+                />
+                
+                <SpecialDeals 
+                    ajaxUrl={this.props.ajaxUrl}
                 />
                 <Categories 
                     ajaxUrl={this.props.ajaxUrl}

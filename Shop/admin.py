@@ -240,3 +240,56 @@ class SubletAdmin(admin.ModelAdmin):
         })
     )
     
+@admin.register(SpecialDeal)
+class SpecialDealAdmin(admin.ModelAdmin):
+    
+    fieldsets = (
+        ("Information", {
+            "fields": (
+               "image", "title","cover_image","desc"
+            ),
+        }),
+        ("Products",{
+            "fields":(
+                "products",
+            ),
+        }),
+        ("Settings",{
+            "fields":(
+                "discount_percentage","ending_date"
+            ),
+        }),
+        ("Timestamp",{
+            "fields":(
+                "creation_date","creation_time"
+            )
+        }),
+        ("Status",{
+            "fields":(
+                "has_expired",
+            )
+        })
+        
+    )
+    readonly_fields = ["creation_date","creation_time" , "image" ,"has_expired"]
+    list_display = ["thumbnail" ,"title" ,"ending_date","has_expired"]
+    def image(self, obj):
+        return mark_safe('<img src="{url}" width="{width}" height="{height}" style="object-fit:cover;"/>'.format(
+            url = obj.cover_image,
+            width='50%',
+            height='50%'
+            )
+    )
+    def thumbnail(self, obj):
+        return mark_safe('<img src="{url}" width="{width}" height="{height}" style="object-fit:cover;border-radius:50%;"/>'.format(
+            url = obj.cover_image,
+            width='200',
+            height='200',
+            )
+    )
+    def has_expired(self,obj):
+        style_expired = "background-color:red;color:white;padding:1em;font-weight:bold;text-align:center;"
+        style_active = "background-color:green;color:white;padding:1em;font-weight:bold;text-align:center;"
+        if(obj.has_expired):
+            return mark_safe(f"<h4 style={style_expired}>Expired</h4>")
+        return mark_safe(f"<p style={style_active}>Active</p>")

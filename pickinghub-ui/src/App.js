@@ -21,6 +21,7 @@ import NavBar from './components/Navbar';
 import Footer from './components/footer';
 import Loader from './components/loader';
 import Departments from './components/departments';
+import Cart from './components/cart/cart';
 
 
 class App extends Component {
@@ -28,6 +29,7 @@ class App extends Component {
     Brand:false,
     Customer:false,
     Admin:false,
+    Cart:[],
     ajaxUrl: window.location.port === '3000' 
               ? 'http://127.0.0.1:8000'
               :`${window.location.protocol}//${window.location.hostname}:${window.location.port}`,
@@ -37,6 +39,8 @@ class App extends Component {
   componentWillMount=()=>{
     this.getBrand();
     const token = cookie.load('sasuke');
+    axios.defaults.xsrfHeaderName = "X-CSRFToken"
+    axios.defaults.xsrfCookieName = 'csrftoken'
     if(token && !this.loggedIn()){
       axios.post(`${this.state.ajaxUrl}/accounts/api/customer-from-token/`,{token})
         .then(response=>{
@@ -165,6 +169,12 @@ class App extends Component {
               />}
             /> 
           </Switch>
+          <Cart 
+            ajaxUrl={ajaxUrl}
+            Brand={Brand}
+            loggedIn={this.loggedIn}
+            Customer={Customer}
+          />
           <Departments 
             ajaxUrl={ajaxUrl}
             Brand={Brand}

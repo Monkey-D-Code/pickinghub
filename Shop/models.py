@@ -1,6 +1,7 @@
 from django.db import models
 from Accounts.models import Customer
 from random import randrange
+from datetime import *
 # Create your models here.
 
 
@@ -236,3 +237,72 @@ class Question(models.Model):
 
     def __str__(self):
         return str(self.customer)
+
+
+class Order(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+
+    saved = models.BooleanField(default=True)
+    ordered = models.BooleanField(default=False)
+    confirmed = models.BooleanField(default=False)
+    dispatched = models.BooleanField(default=False)
+    delivered = models.BooleanField(default=False)
+
+    estimated_date = models.DateField(blank=True,null=True)
+    estimated_time = models.TimeField(blank=True,null=True)
+
+    date = models.DateField(auto_now_add=True)
+    time = models.TimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.customer
+
+    @property
+    def sum(self):
+        total = 0
+        for one_order in self.singleorder_set.all():
+            total += one_order.total
+        return total
+
+    @property
+    def orders(self):
+        return self.singleorder_set.all()
+
+
+class SingleOrder(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    sublet = models.ForeignKey(Sublet, on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+
+
+    date = models.DateField(auto_now_add=True)
+    time = models.TimeField(auto_now_add=True)
+
+    @property
+    def total(self):
+        return self.sublet.selling_price * self.quantity
+
+    def __str__(self):
+        return self.order
+
+
+class SpecialDeal(models.Model):
+    title = models.CharField(max_length=50)
+    cover_image = models.URLField(max_length=400)
+    desc = models.TextField()
+    products = models.ManyToManyField(Product)
+    discount_percentage = models.DecimalField(max_digits=5, decimal_places=2)
+    ending_date = models.DateField()
+
+    creation_date = models.DateField(auto_now_add=True)
+    creation_time = models.TimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+    @property
+    def has_expired(self):
+        now = datetime.now()
+        if datetime(now.year,now.month,now.day).date() > self.ending_date:
+            return True
+        return False 

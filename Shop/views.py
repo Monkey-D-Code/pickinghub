@@ -97,4 +97,26 @@ class DepartmentDetailApiView(RetrieveAPIView):
     serializer_class = DepartmentDetailSerializer
     queryset = Department.objects.all()
 
+class SpecialDealListCreate(ListCreateAPIView):
+    serializer_class = SpecialDealSerializer
+    queryset = SpecialDeal.objects.all()
+
+# orders
+class NewOrderAPIView(APIView):
+    def post(self,request,customer_id):
+        cart = request.data
+        customer = Customer.objects.get(id=customer_id)
+        order = Order.objects.create(
+            customer = customer
+        )
+        for sublet in cart:
+            sublet_from_db = Sublet.objects.get(id=sublet["id"])
+            SingleOrder.objects.create(
+                order=order,
+                sublet=sublet_from_db,
+                quantity=sublet["quantity"]
+            )
+            serializer = OrderSerializer(order)
+        return Response(serializer.data,status=status.HTTP_201_CREATED)
+
     
