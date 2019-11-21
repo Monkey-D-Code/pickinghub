@@ -303,6 +303,7 @@ class SpecialDeal(models.Model):
     @property
     def has_expired(self):
         now = datetime.now()
-        if datetime(now.year,now.month,now.day).date() > self.ending_date:
-            return True
+        if self.ending_date:
+            if datetime(now.year,now.month,now.day).date() > self.ending_date:
+                return True
         return False 
