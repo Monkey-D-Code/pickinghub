@@ -9,3 +9,13 @@ export const fetchSpecialDeals = (url)=>{
         });
    }
 }
+
+export const fetchVariantsOfProduct = (url)=>{
+    return async (dispatch,getState)=>{
+        const response = await axios.get(url);
+        dispatch({
+            type:'FETCH_VARIANTS',
+            payload : response,
+        });
+    }
+}

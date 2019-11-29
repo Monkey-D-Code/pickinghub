@@ -14,7 +14,7 @@ STATIC_DIR = os.path.join(BASE_DIR , 'static')
 SECRET_KEY = '8h2$+r$o60=dhr_bt1-cdrvz0li!*&9#xnbpc_mhg$m*)%blw)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['pickinghub.pythonanywhere.com']
 
@@ -69,7 +69,10 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Pickinghub.wsgi.application'
-
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS' : 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE' : 100,
+}
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases

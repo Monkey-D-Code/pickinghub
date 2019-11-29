@@ -18,6 +18,11 @@ from rest_framework.generics import (
 )
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.filters import (
+    SearchFilter,
+    OrderingFilter,
+)
 
 # Create your views here.
 class DepartmentDetailView(DetailView):
@@ -119,4 +124,17 @@ class NewOrderAPIView(APIView):
             serializer = OrderSerializer(order)
         return Response(serializer.data,status=status.HTTP_201_CREATED)
 
+
+class VariantsOfProduct(ListAPIView):
+    serializer_class = VariantSerializer
+    queryset = Variant.objects.all()
+
+    def get_queryset(self):
+        return self.queryset.filter(product_id=self.kwargs.get('product_id'))
     
+class SearchProductsAPIView(ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    pagination_class = PageNumberPagination
+    filter_backends = (SearchFilter,OrderingFilter)
+    search_fields = ('name','company__full_name','category__name','category__demographic__name')

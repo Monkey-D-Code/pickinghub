@@ -4,10 +4,13 @@ import './SpecialDeals.css';
 import {NavLink} from 'react-router-dom';
 import {fetchSpecialDeals} from '../../actions';
 
+import ProductCard from '../ProductCard/ProductCard';
+
+
 
 class SingleDeal extends Component{
     render=()=>{
-        const {Deal} = this.props;
+        const {Deal,ajaxUrl} = this.props;
         const {products} = Deal;
         return(
             <div>
@@ -28,25 +31,17 @@ class SingleDeal extends Component{
                         </div>
                     </div>
                 </section>
-                <section className="ftco-section ftco-section-more">
-                    <div className='row cotainer'>
+                <section className="ftco-section ftco-section-more container">
+                    <div className='row'>
                         
                             {products.map((product,j)=>{
                                 return(
-                                    <div className='col-md-3 col-sm-6'>
-                                        <div className="card" key={j}>
-                                            <NavLink to={`/product/${product.id}`}>
-                                                <img width={'100%'} src={product.random_product_image} alt={`${product.name}`}/>
-                                            </NavLink>
-                                            
-                                            <div className='card-body'>
-                                                <h6 className='discount'>{Deal.discount_percentage}% off</h6>
-                                                <NavLink to={`/product/${product.id}`}>
-                                                    <h3 className='card-title product-name'>{product.name}</h3>
-                                                </NavLink>
-                                                <p className='card-text product-desc'>{product.description}</p>
-                                            </div>
-                                        </div>
+                                    <div className='col-md-4 col-sm-6'  key={j}>
+                                       <ProductCard 
+                                            product={product}
+                                            ajaxUrl={ajaxUrl}
+                                            Deal={Deal}
+                                       />
                                         <br/>
                                     </div>
                                 );
@@ -72,7 +67,7 @@ class SpecialDeals extends Component{
         const {
             Brand,
             specialdeals,
-
+            ajaxUrl,
         } = this.props;
         const {data} = specialdeals;
         
@@ -80,12 +75,14 @@ class SpecialDeals extends Component{
             <div style={{marginTop:'5em'}}>
                 {
                     data !== undefined ?
-                    data.map((deal,i)=>{
-                        
-                        return(
-                            <SingleDeal Deal={deal} key={i} />
-                        );
-                    })
+                    <div>
+                        {data.map((deal,i)=>{
+                            
+                            return(
+                                <SingleDeal Deal={deal} key={i} ajaxUrl={ajaxUrl}/>
+                            );
+                        })}
+                    </div>
                     : <h4 className='alert alert-danger text-center'>Something went wrong.</h4>
                 }
                 {data !== undefined && data.length === 0 && <h3 className='text-center alert alert-warning'>No Deals Currently active</h3>}

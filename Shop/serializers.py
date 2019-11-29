@@ -118,3 +118,4 @@ class SpecialDealSerializer(ModelSerializer):
         model = SpecialDeal
         fields = '__all__'
 
+

@@ -15,6 +15,7 @@ import Contact from './pages/contact';
 import About from './pages/about';
 import DepartmentDetail from './pages/department_detail';
 import CategoryDetail from './pages/category_detail';
+import Search from './pages/Search/Search';
 
 // importing components
 import NavBar from './components/Navbar';
@@ -22,6 +23,7 @@ import Footer from './components/footer';
 import Loader from './components/loader';
 import Departments from './components/departments';
 import Cart from './components/cart/cart';
+import FloatingSearch from './components/FloatingSearch/FloatingSearch';
 
 
 class App extends Component {
@@ -168,7 +170,17 @@ class App extends Component {
                 loggedIn={this.loggedIn}
               />}
             /> 
+            <Route 
+              exact path='/search'
+              children={
+                <Search 
+                  ajaxUrl={ajaxUrl}
+                  Brand={Brand}
+                />
+              }
+            />
           </Switch>
+          <FloatingSearch />
           <Cart 
             ajaxUrl={ajaxUrl}
             Brand={Brand}

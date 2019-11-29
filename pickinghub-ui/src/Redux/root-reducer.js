@@ -1,9 +1,10 @@
 import {combineReducers} from 'redux';
-import SpecialDealReducer from './SpecialDealReducer';
-import variantsReducer from './variantsReducer';
+
+import SpecialDealReducer from '../reducers/SpecialDealReducer';
+import variantsReducer from '../reducers/variantsReducer';
 
 // modified reducers
-import searchProductsReducer from '../Redux/SearchProducts/SearchProducts.reducer';
+import searchProductsReducer from './SearchProducts/SearchProducts.reducer';
 
 
 export default combineReducers({

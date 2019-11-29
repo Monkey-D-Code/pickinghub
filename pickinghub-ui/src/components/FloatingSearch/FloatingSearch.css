@@ -1,0 +1,25 @@
+.floating-search{
+    height : 3em;
+    width : 18em;
+    display: block;
+    position: fixed;
+    top : 7.5em;
+    right :1em;
+    background-color: #D183C9;
+    z-index: 99;
+}
+
+.floating-search input[type="text"]{
+    padding : 0.3em;
+    width : 80%;
+    height: 3em;
+    border : 2px solid #D183C9;
+}
+
+.floating-search button{
+    height: 3em;
+    background-color: #D183C9;
+    width : 20%;
+    border : 2px solid #D183C9;
+    color: white;
+}

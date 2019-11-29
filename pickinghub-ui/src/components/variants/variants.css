@@ -1,0 +1,38 @@
+.single-variant{
+    border : 1px solid #545454;
+    padding : 0.5em;
+    margin: 0;
+    border-radius: 0.4em;
+    
+}
+
+.variant-label{
+    color :#94BA39;
+}
+
+.one-sublet{
+    display: inline;
+    margin : 0 0.2em 0 0.2em;
+    cursor: pointer;
+
+}
+.sublet-value{
+    background-color:#7D499B;
+    border: 1px solid #7D499B;
+    color : white;
+    padding: 0.3em;
+    
+    border-radius: 0.4em;
+    outline-color: #08B2E3;
+    
+}
+.sublet-value span{
+    line-height: 1em;
+}
+
+.color-hex{
+    width : 2.5em;
+    height: 2.5em;
+    border-radius: 50%;
+    display: inline-block;
+}
