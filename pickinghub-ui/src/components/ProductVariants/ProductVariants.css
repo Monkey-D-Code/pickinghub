@@ -1,12 +1,12 @@
 .product-sublets li{
     list-style-type: none;
     margin-bottom: 0.3em;
-    display: grid;
-    grid-template-columns: 1fr 3fr 3fr;
+    display: flex;
+    align-content: space-between;
 }
 
 .value{
-    
+    margin-left : 0.3em;
     display: inline-block;
     text-align: center;
     
@@ -15,8 +15,9 @@
 .price{
     font-size: 1em;
     background-color: rgb(43, 170, 31);
-    padding : 0;
+    padding : 0.35em;
     color: white;
-    
+    margin-left : 0.3em;
     text-align: center;
+    border-radius: 0.3em;
 }

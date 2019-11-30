@@ -8,7 +8,7 @@ const backendAPI =  axios.create({
     // baseURL :  'https://pickinghub.pythonanywhere.com',
     
 
-    timeout : 5000,
+    timeout : 10000,
     headers : {
         "X-CSRFToken" : cookie.load('csrftoken'),
     }

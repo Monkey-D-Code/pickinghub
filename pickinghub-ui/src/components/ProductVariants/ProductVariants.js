@@ -41,7 +41,7 @@ class ProductVariants extends Component{
                                             &&<div style={{
                                                 backgroundColor:`#${sublet.color_hex}`,
                                                 height : '2em',
-                                                
+                                                width : '2em',
                                                 display:'inline-block',
                                                 
                                                 
