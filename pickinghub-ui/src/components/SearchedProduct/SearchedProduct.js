@@ -1,7 +1,9 @@
 import React,{Component} from 'react';
 import {NavLink} from 'react-router-dom';
+import {connect} from 'react-redux';
 import './SearchedProduct.css';
 
+import ProductVariants from '../ProductVariants/ProductVariants';
 
 class SearchedProduct extends Component{
 
@@ -12,6 +14,9 @@ class SearchedProduct extends Component{
                 <NavLink to={`/product/${product.id}`}>
                     <img src={product.random_product_image} className="card-img-top" alt={product.name} />
                 </NavLink>
+                <div className="card-body">
+                    <ProductVariants id={product.id} />
+                </div>
                 
                 <div className="card-body">
                     <h5 className="card-title">

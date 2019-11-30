@@ -43,7 +43,7 @@ class Categories extends Component{
     getCategoryWiseProducts=()=>{
         this.setState({loading:true});
         const {ajaxUrl} = this.props;
-        axios.get(`${ajaxUrl}/shop/api/category-wise-products/`)
+        axios.get(`${ajaxUrl}/shop/api/category-wise-5-products/`)
             .then(response=>{
                 this.setState({
                     Categories:response.data,
@@ -81,8 +81,8 @@ class Categories extends Component{
                             <h3 style={{color:'#F7D4DC'}}><NavLink to={`/category/${cat.id}`}><img src={cat.cover_image} style={category_thumb} alt={`${cat.name}`}/> {cat.name}</NavLink></h3>
                             <hr/>
                             <div style={products_list} className='row'>
-                                {cat.all_products.length > 0
-                                    ? cat.all_products.map((p,j)=>{
+                                {cat.five_products.length > 0
+                                    ? cat.five_products.map((p,j)=>{
                                         return(
                                             <div key={j} style={single_product} className='col-md-3'>
                                                 <NavLink to={`/product/${p.id}`}>

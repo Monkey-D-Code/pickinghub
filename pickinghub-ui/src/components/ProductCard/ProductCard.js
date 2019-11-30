@@ -4,7 +4,7 @@ import {NavLink} from 'react-router-dom';
 import './ProductCard.css';
 
 // importing components
-import Variants from '../variants/variants';
+import ProductVariants from '../ProductVariants/ProductVariants';
 
 
 class ProductCard extends Component{
@@ -24,11 +24,7 @@ class ProductCard extends Component{
                     <img width={'100%'} src={product.random_product_image} alt={`${product.name}`}/>
                 </NavLink>
                 <div className='card-body'>
-                    <Variants 
-                        productId={product.id} 
-                        ajaxUrl={ajaxUrl} 
-                        // setDisplayImage={this.setDisplayImage}    
-                    />
+                    <ProductVariants id={product.id} />
                 </div>
                 <div className='card-body'>
                     <h6 className='discount'>{Deal.discount_percentage}% off</h6>

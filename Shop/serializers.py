@@ -81,6 +81,12 @@ class CategorySerializer(ModelSerializer):
         model = Category
         fields = '__all__'
 
+class Category5productsSerializer(ModelSerializer):
+    five_products = ProductSerializer(many=True)
+    class Meta:
+        model = Category
+        fields = '__all__'
+
 class DemographicSerializer(ModelSerializer):
     categories = CategorySerializer(many=True)
     class Meta:

@@ -84,6 +84,10 @@ class CategoryWiseProductsAPIView(ListAPIView):
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
 
+class CategoryWise5ProductsAPIView(ListAPIView):
+    serializer_class = Category5productsSerializer
+    queryset = Category.objects.all()
+
 class CategoryDetailAPIView(RetrieveAPIView):
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
