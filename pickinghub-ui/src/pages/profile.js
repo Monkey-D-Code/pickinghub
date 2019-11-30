@@ -1,7 +1,19 @@
 import React,{Component} from 'react';
 import {withRouter} from 'react-router-dom';
-import cookie from 'react-cookies';
-import axios from 'axios';
+import {connect} from 'react-redux';
+
+
+// importing selectors
+import {
+    selectActiveCustomer,
+
+} from '../Redux/User/User.selectors';
+
+// importing actions
+import {
+    logout,
+
+} from '../Redux/User/User.actions';
 
 class Profile extends Component{
     state={
@@ -22,38 +34,24 @@ class Profile extends Component{
             
         }
     }
-    componentWillMount = ()=>{
-        
-        const {ajaxUrl} = this.props;
-        const token = cookie.load('sasuke');
-        if(token){
-            this.setState({loading:true});
-            axios.post(`${ajaxUrl}/accounts/api/customer-from-token/`,{token})
-              .then(response=>{
-                this.props.setCustomer(response.data);
-                this.setState({loading:false});
-              })
-              .catch(err=>{
-                console.log(err);
-                this.setState({loading:false});
-                alert(JSON.stringify(err.response.data));
-              })
-        }else{
-            this.props.history.push("/");
-        }
-    }
+
     logout = ()=>{
         this.props.logout();
-        this.props.history.push("/login");
+        this.props.history.push("/");
     }
     render=()=>{
         const {loading} = this.state;
-        const {Brand,Customer} = this.props;
-        const {all_address,contacts} = Customer;
+        const {Brand} = this.props;
+        
         const {
             dp,
             name,
         } = this.style;
+        const {
+            activeCustomer,
+
+        } = this.props;
+        const {all_address,contacts} = activeCustomer;
         if(loading){
             return(
                 <div className="hero-wrap hero-bread" style={{
@@ -81,7 +79,7 @@ class Profile extends Component{
                     <div className="container">
                         <div className="row no-gutters slider-text align-items-center justify-content-center">
                         <div className="col-md-9 text-center">
-                            <h2 className="mb-0 bread" style={name}><img src={`https://ui-avatars.com/api/?name=${Customer.full_name}&size=500&color=A573C6`} style={dp}/> {Customer.full_name}</h2>
+                            <h2 className="mb-0 bread" style={name}><img src={`https://ui-avatars.com/api/?name=${activeCustomer.full_name}&size=500&color=A573C6`} style={dp}/> {activeCustomer.full_name}</h2>
                             <br/>
                             <button className="btn btn-primary" onClick={this.logout}><i className="fa fa-sign-out" aria-hidden="true"></i> Logout</button>
                         </div>
@@ -127,4 +125,16 @@ class Profile extends Component{
     }
 }
 
-export default withRouter(Profile);
+const mapStateToProps = state => ({
+    activeCustomer : selectActiveCustomer(state),
+})
+
+const mapDispatchToProps = dispatch => ({
+    logout : ()=>dispatch(logout()),
+})
+
+export default withRouter(connect(
+    mapStateToProps,
+    mapDispatchToProps,
+
+)(Profile));

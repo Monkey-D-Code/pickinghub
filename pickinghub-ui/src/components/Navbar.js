@@ -1,5 +1,11 @@
 import React,{Component} from 'react';
+import {connect} from 'react-redux';
 import {NavLink} from 'react-router-dom';
+
+// import selectors
+import {
+    isAuthenticated,
+} from '../Redux/User/User.selectors';
 
 class NavBar extends Component{
     style = {
@@ -8,6 +14,9 @@ class NavBar extends Component{
         }
     }
     render=()=>{
+        const {
+            isAuthenticated,
+        } = this.props;
         const {
             full_name,
             logo_url
@@ -41,12 +50,11 @@ class NavBar extends Component{
                     <li className="nav-item"><NavLink to="/about" className="nav-link">About</NavLink></li>
                     
                     <li className="nav-item"><NavLink to="/contact" className="nav-link">Contact</NavLink></li>
-                    {this.props.loggedIn() 
-                        ?   <li className="nav-item"><NavLink to="/profile" className="nav-link"><i className="fa fa-sign-in" aria-hidden="true"></i> Profile</NavLink></li>
-                        :   <li className="nav-item"><NavLink to="/login" className="nav-link"><i className="fa fa-sign-in" aria-hidden="true"></i> Login</NavLink></li>
+                    {isAuthenticated 
+                        &&   <li className="nav-item"><NavLink to="/profile" className="nav-link"><i className="fa fa-sign-in" aria-hidden="true"></i> Profile</NavLink></li>
                     }
                     
-                    {!this.props.loggedIn() && <li className="nav-item"><NavLink to="/register" className="nav-link"><i className="fa fa-user-plus" aria-hidden="true"></i> Register</NavLink></li>}
+                    {!isAuthenticated && <li className="nav-item"><NavLink to="/register" className="nav-link"><i className="fa fa-user-plus" aria-hidden="true"></i> Register</NavLink></li>}
                     
 
                     </ul>
@@ -57,4 +65,11 @@ class NavBar extends Component{
     }
 }
 
-export default NavBar;
+const mapStateToProps = state => ({
+    isAuthenticated : isAuthenticated(state),
+})
+
+export default connect(
+    mapStateToProps,
+
+)(NavBar);

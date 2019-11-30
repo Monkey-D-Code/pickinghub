@@ -1,0 +1,47 @@
+.login-btn{
+    height : 4em;
+    width : 4em;
+    border-radius: 50%;
+    position : fixed;
+    right: 1.5em;
+    bottom : 6em;
+    z-index: 99;
+}
+
+.login-body{
+    
+    z-index: 99;
+    padding: 0.7em;
+    height: 18em;
+    width : 20em;
+    position : fixed;
+    border-radius: 0.4em;
+    right : 7em;
+    bottom : 1em;
+    background-color: #ffd1fc;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='105' viewBox='0 0 80 105'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='death-star' fill='%23ce76c8' fill-opacity='0.4'%3E%3Cpath d='M20 10a5 5 0 0 1 10 0v50a5 5 0 0 1-10 0V10zm15 35a5 5 0 0 1 10 0v50a5 5 0 0 1-10 0V45zM20 75a5 5 0 0 1 10 0v20a5 5 0 0 1-10 0V75zm30-65a5 5 0 0 1 10 0v50a5 5 0 0 1-10 0V10zm0 65a5 5 0 0 1 10 0v20a5 5 0 0 1-10 0V75zM35 10a5 5 0 0 1 10 0v20a5 5 0 0 1-10 0V10zM5 45a5 5 0 0 1 10 0v50a5 5 0 0 1-10 0V45zm0-35a5 5 0 0 1 10 0v20a5 5 0 0 1-10 0V10zm60 35a5 5 0 0 1 10 0v50a5 5 0 0 1-10 0V45zm0-35a5 5 0 0 1 10 0v20a5 5 0 0 1-10 0V10z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    overflow: auto;
+}
+
+.login-button{
+    height: 3em;
+    width : 10em;
+    font-size: 1.2em;
+    font-weight: bold;
+    background-color: white;
+    border: none;
+    color : rgb(156, 40, 127);
+    text-transform: uppercase;
+    padding: 0.6em;
+    border-radius: 0.2em;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%,0);
+    cursor: pointer;
+}
+
+.register-link{
+    background-color: rgb(91, 12, 107);
+    color : white;
+    text-align: center;
+}

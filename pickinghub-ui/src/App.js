@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import {BrowserRouter as Router,Switch,Route,withRouter} from 'react-router-dom';
+import {connect} from 'react-redux';
 import axios from 'axios';
 import cookie from 'react-cookies';
 import './App.css';
@@ -24,6 +25,11 @@ import Loader from './components/loader';
 import Departments from './components/departments';
 import Cart from './components/cart/cart';
 import FloatingSearch from './components/FloatingSearch/FloatingSearch';
+import FloatingLogin from './components/FloatingLogin/FloatingLogin';
+
+
+// importing selectors
+import {isAuthenticated} from './Redux/User/User.selectors';
 
 
 class App extends Component {
@@ -99,6 +105,7 @@ class App extends Component {
 
   render =()=>{
     const{loading,Brand,ajaxUrl,Customer} = this.state;
+    const {isAuthenticated} = this.props;
     if(loading){
       return <Loader/>;
     }
@@ -180,6 +187,7 @@ class App extends Component {
               }
             />
           </Switch>
+          {!isAuthenticated && <FloatingLogin />}
           <FloatingSearch />
           <Cart 
             ajaxUrl={ajaxUrl}
@@ -200,4 +208,11 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state)=>({
+  isAuthenticated : isAuthenticated(state),
+})
+
+export default connect(
+  mapStateToProps,
+
+)(App);

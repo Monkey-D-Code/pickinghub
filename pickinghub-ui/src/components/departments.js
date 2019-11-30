@@ -1,11 +1,20 @@
 import React,{Component} from 'react';
-import axios from 'axios';
 import {NavLink} from 'react-router-dom';
+import {connect} from 'react-redux';
+
+import {getDepartments} from '../Redux/Department/Department.actions';
+import {
+            selectdepartmentlist,
+            selectGettingDepartments,
+            selectDepartmentsError,
+
+        } from '../Redux/Department/Department.selectors';
+
+import Loader from './loader';
 
 class Departments extends Component{
     state={
-        Departments:[],
-        loading:false,
+        
         visible:false,
     }
     style={
@@ -54,21 +63,9 @@ class Departments extends Component{
         }
     }
 
-    componentWillMount=()=>{
-        this.setState({loading:true});
-        const {ajaxUrl} = this.props;
-        axios.get(`${ajaxUrl}/shop/api/department/list/`)
-            .then(response=>{
-                this.setState({
-                    Departments:response.data,
-                    loading:false,
-                })
-            })
-            .catch(err=>{
-                console.log(err);
-                this.setState({loading:false});
-                alert(JSON.stringify(err.response.data));
-            })
+    componentDidMount=()=>{
+        const {getDepartments} = this.props;
+        getDepartments();
     }
     toggleVisibility=()=>{
         this.setState({visible:!this.state.visible});
@@ -82,13 +79,13 @@ class Departments extends Component{
             heading,
 
         } = this.style;
-        const {Departments,loading,visible} = this.state;
-        
+        const {visible} = this.state;
+        const {departmentlist,loading,error} = this.props;
         return(
             <div>
                 {visible && <h3 style={heading}>Departments</h3>}
                 {visible && <div style={department_list}>
-                        {Departments.map((dept,i)=>{
+                        {departmentlist.map((dept,i)=>{
                             return(
                                 <div style={single_dept} key={i} className="row">
                                     <div className="col-sm-7">
@@ -107,7 +104,7 @@ class Departments extends Component{
                     </div>
                 }
                 <button style={floating} className='btn btn-primary' disabled={loading} onClick={this.toggleVisibility}>
-                {loading?<i className="fa fa-spinner" aria-hidden="true"></i>
+                {loading?<Loader />
                         :<i className="fa fa-bars" aria-hidden="true"></i>
                 }
                 </button>
@@ -117,4 +114,18 @@ class Departments extends Component{
     }
 }
 
-export default Departments;
+const mapStateToProps = state =>({
+    departmentlist : selectdepartmentlist(state),
+    loading : selectGettingDepartments(state),
+    error : selectDepartmentsError(state),
+})
+
+const mapDispatchToProps = dispatch => ({
+    getDepartments : ()=>dispatch(getDepartments()),
+})
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+
+)(Departments);
