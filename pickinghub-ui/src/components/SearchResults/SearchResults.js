@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import './SearchResults.css'
 
 import SearchedProduct from '../SearchedProduct/SearchedProduct';
-
+import Loader from '../loader';
 
 class SearchResults extends Component{
 
@@ -18,16 +18,7 @@ class SearchResults extends Component{
         } = this.props;
         if(searchingProducts){
             return(
-                <div className="spinner-grow text-success" role="status" style={{
-                    width : '100%',
-                    height : '100%',
-                    position : 'absolute',
-                    top : '50%',
-                    right : '50%',
-                    transform : 'translate(-50%,-50%)'
-                }}>
-                    <span className="sr-only">Loading...</span>
-                </div>
+                <Loader />
             )
         }
 

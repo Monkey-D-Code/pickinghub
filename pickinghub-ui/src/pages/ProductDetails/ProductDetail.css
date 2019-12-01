@@ -1,0 +1,131 @@
+.product-name1{
+    font-size: 2em !important;
+    background-color: #e3bfe2;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='152' height='152' viewBox='0 0 152 152'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='temple' fill='%23bf99bf' fill-opacity='0.49'%3E%3Cpath d='M152 150v2H0v-2h28v-8H8v-20H0v-2h8V80h42v20h20v42H30v8h90v-8H80v-42h20V80h42v40h8V30h-8v40h-42V50H80V8h40V0h2v8h20v20h8V0h2v150zm-2 0v-28h-8v20h-20v8h28zM82 30v18h18V30H82zm20 18h20v20h18V30h-20V10H82v18h20v20zm0 2v18h18V50h-18zm20-22h18V10h-18v18zm-54 92v-18H50v18h18zm-20-18H28V82H10v38h20v20h38v-18H48v-20zm0-2V82H30v18h18zm-20 22H10v18h18v-18zm54 0v18h38v-20h20V82h-18v20h-20v20H82zm18-20H82v18h18v-18zm2-2h18V82h-18v18zm20 40v-18h18v18h-18zM30 0h-2v8H8v20H0v2h8v40h42V50h20V8H30V0zm20 48h18V30H50v18zm18-20H48v20H28v20H10V30h20V10h38v18zM30 50h18v18H30V50zm-2-40H10v18h18V10z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    border-radius: 0.2em;
+    color : #830A48 !important;
+    -webkit-box-shadow: 0px 2px 29px -10px rgba(74,5,28,1);
+    -moz-box-shadow: 0px 2px 29px -10px rgba(74,5,28,1);
+    box-shadow: 0px 2px 29px -10px rgba(74,5,28,1);
+    text-transform: capitalize !important;
+}
+
+.product-details{
+    
+    background-color: #ffffff;
+    background-color: #ffffff;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='88' height='88' viewBox='0 0 88 88'%3E%3Cg fill='%23dbc1db' fill-opacity='0.49'%3E%3Cpath fill-rule='evenodd' d='M29.42 29.41c.36-.36.58-.85.58-1.4V0h-4v26H0v4h28c.55 0 1.05-.22 1.41-.58h.01zm0 29.18c.36.36.58.86.58 1.4V88h-4V62H0v-4h28c.56 0 1.05.22 1.41.58zm29.16 0c-.36.36-.58.85-.58 1.4V88h4V62h26v-4H60c-.55 0-1.05.22-1.41.58h-.01zM62 26V0h-4v28c0 .55.22 1.05.58 1.41.37.37.86.59 1.41.59H88v-4H62zM18 36c0-1.1.9-2 2-2h10a2 2 0 1 1 0 4H20a2 2 0 0 1-2-2zm0 16c0-1.1.9-2 2-2h10a2 2 0 1 1 0 4H20a2 2 0 0 1-2-2zm16-26a2 2 0 0 1 2-2 2 2 0 0 1 2 2v4a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-4zm16 0a2 2 0 0 1 2-2 2 2 0 0 1 2 2v4a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-4zM34 58a2 2 0 0 1 2-2 2 2 0 0 1 2 2v4a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-4zm16 0a2 2 0 0 1 2-2 2 2 0 0 1 2 2v4a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-4zM34 78a2 2 0 0 1 2-2 2 2 0 0 1 2 2v6a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-6zm16 0a2 2 0 0 1 2-2 2 2 0 0 1 2 2v6a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-6zM34 4a2 2 0 0 1 2-2 2 2 0 0 1 2 2v6a2 2 0 0 1-2 2 2 2 0 0 1-2-2V4zm16 0a2 2 0 0 1 2-2 2 2 0 0 1 2 2v6a2 2 0 0 1-2 2 2 2 0 0 1-2-2V4zm-8 82a2 2 0 1 1 4 0v2h-4v-2zm0-68a2 2 0 1 1 4 0v10a2 2 0 1 1-4 0V18zM66 4a2 2 0 1 1 4 0v8a2 2 0 1 1-4 0V4zm0 72a2 2 0 1 1 4 0v8a2 2 0 1 1-4 0v-8zm-48 0a2 2 0 1 1 4 0v8a2 2 0 1 1-4 0v-8zm0-72a2 2 0 1 1 4 0v8a2 2 0 1 1-4 0V4zm24-4h4v2a2 2 0 1 1-4 0V0zm0 60a2 2 0 1 1 4 0v10a2 2 0 1 1-4 0V60zm14-24c0-1.1.9-2 2-2h10a2 2 0 1 1 0 4H58a2 2 0 0 1-2-2zm0 16c0-1.1.9-2 2-2h10a2 2 0 1 1 0 4H58a2 2 0 0 1-2-2zm-28-6a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm8 26a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm16 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM36 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm16 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm-8-8a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 68a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm16-34a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm16-12a2 2 0 1 0 0 4 6 6 0 1 1 0 12 2 2 0 1 0 0 4 10 10 0 1 0 0-20zm-64 0a2 2 0 1 1 0 4 6 6 0 1 0 0 12 2 2 0 1 1 0 4 10 10 0 1 1 0-20zm56-12a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 48a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm-48 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0-48a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm24 32a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-4a6 6 0 1 0 0-12 6 6 0 0 0 0 12zm36-36a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-4a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM10 44c0-1.1.9-2 2-2h8a2 2 0 1 1 0 4h-8a2 2 0 0 1-2-2zm56 0c0-1.1.9-2 2-2h8a2 2 0 1 1 0 4h-8a2 2 0 0 1-2-2zm8 24c0-1.1.9-2 2-2h8a2 2 0 1 1 0 4h-8a2 2 0 0 1-2-2zM3 68c0-1.1.9-2 2-2h8a2 2 0 1 1 0 4H5a2 2 0 0 1-2-2zm0-48c0-1.1.9-2 2-2h8a2 2 0 1 1 0 4H5a2 2 0 0 1-2-2zm71 0c0-1.1.9-2 2-2h8a2 2 0 1 1 0 4h-8a2 2 0 0 1-2-2zm6 66a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-4a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM8 86a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-4a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0-68A6 6 0 1 1 8 2a6 6 0 0 1 0 12zm0-4a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm36 36a2 2 0 1 0 0-4 2 2 0 0 0 0 4z'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.product-descr{
+    padding : 0.7em;
+    background-color: rgba(239, 151, 247, 0.349);
+    color : #36382E;
+    border-radius: 0.3em;
+    border : 0.5px solid rgb(239, 151, 247);
+    -webkit-box-shadow: 9px 10px 29px -16px rgba(74,5,28,1);
+    -moz-box-shadow: 9px 10px 29px -16px rgba(74,5,28,1);
+    box-shadow: 9px 10px 29px -16px rgba(74,5,28,1);
+    
+}
+
+.single-sublet{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    
+}
+
+.sublet-body{
+    margin : 0.6em 0 0.6em 0;
+    padding : 0.8em;
+    border: 1px dashed rgba(54, 56, 46, 0.397);
+}
+
+.market-price{
+    font-size : 1.5em;
+    background-color: rgba(236, 74, 29, 0.671);
+    padding : 0.3em;
+    color: rgba(255, 255, 255, 0.603);
+    font-weight: bold;
+    text-decoration: line-through;
+}
+.pro-price{
+    display: flex;
+}
+.selling-price{
+    font-size : 1.5em;
+    background-color: #9BC53D;
+    padding : 0.3em;
+    color: white;
+    font-weight: bold;
+}
+.color{
+    height: 3.4em;
+    width : 3.4em;
+    border-radius: 50% ;
+    -webkit-box-shadow: 34px 43px 18px -32px rgba(0,0,0,0.33);
+    -moz-box-shadow: 34px 43px 18px -32px rgba(0,0,0,0.33);
+    box-shadow: 34px 43px 18px -32px rgba(0,0,0,0.33) !important;
+
+
+}
+
+.value{
+    color: rgb(216, 49, 216);
+    
+
+}
+
+.variant-label{
+    background-color: #830A48;
+    color: white;
+    padding: 0.5em;
+    width: fit-content;
+    border-radius: 0.3em;
+    -webkit-box-shadow: 6px 9px 18px -2px rgba(0,0,0,0.27);
+    -moz-box-shadow: 6px 9px 18px -2px rgba(0,0,0,0.27);
+    box-shadow: 6px 9px 18px -2px rgba(0,0,0,0.27);
+}
+
+.sublet-images{
+    display: flex;
+    width: 100%;
+    overflow: auto;
+    justify-content: center;
+    padding : 0 0.3em 0 0.3em;
+    align-items: center;
+}
+
+.product-image{
+    width : 5em;
+    margin : 0 0.4em 0 0.4em;
+    cursor: pointer;
+    -webkit-box-shadow: 6px 9px 18px -2px rgba(0,0,0,0.27);
+    -moz-box-shadow: 6px 9px 18px -2px rgba(0,0,0,0.27);
+    box-shadow: 6px 9px 18px -2px rgba(0,0,0,0.27);
+}
+
+.main-image{
+    width : 100%;
+    height: inherit;
+}
+
+@media only screen and (max-width: 360px) {
+    .market-price{
+        font-size : 1.2em;
+        
+    }
+    .pro-price{
+        display: flex;
+    }
+    .selling-price{
+        font-size : 1.2em;
+        
+    }
+
+    .value{
+        font-size: 1.3em;
+    }
+  }

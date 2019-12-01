@@ -9,6 +9,7 @@ import searchProductsReducer from './SearchProducts/SearchProducts.reducer';
 import productVariantsReducer from './ProductVariants/ProductVariants.reducer';
 import userReducer from './User/User.reducer';
 import departmentReducer from './Department/Department.reducer';
+import productReducer from './Product/Product.reducer';
 
 const persistConfig = {
     key : 'root',
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
     productVariants : productVariantsReducer,
     user : userReducer,
     department : departmentReducer,
+    product : productReducer,
 });
 
 export default persistReducer(persistConfig,rootReducer);

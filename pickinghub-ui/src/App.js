@@ -9,7 +9,7 @@ import './App.css';
 // importing pages
 import Home from './pages/home';
 import Login from './pages/login';
-import ProductDetails from './pages/product_detail';
+import ProductDetails from './pages/ProductDetails/product_detail';
 import Register from './pages/register';
 import Profile from './pages/profile';
 import Contact from './pages/contact';
@@ -190,10 +190,9 @@ class App extends Component {
           {!isAuthenticated && <FloatingLogin />}
           <FloatingSearch />
           <Cart 
-            ajaxUrl={ajaxUrl}
+            
             Brand={Brand}
-            loggedIn={this.loggedIn}
-            Customer={Customer}
+            
           />
           <Departments 
             ajaxUrl={ajaxUrl}

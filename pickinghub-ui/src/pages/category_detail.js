@@ -2,6 +2,8 @@ import React,{Component} from 'react';
 import {withRouter,NavLink} from 'react-router-dom';
 import axios from 'axios';
 
+import ProductVariants from '../components/ProductVariants/ProductVariants';
+
 class CategoryDetail extends Component{
     state = {
         Category:{},
@@ -141,6 +143,9 @@ class CategoryDetail extends Component{
                                                 <NavLink to={`/product/${pro.id}`}>
                                                     <img src={pro.random_product_image} style={{width:'100%'}}/>
                                                 </NavLink>
+                                                <div className='card-body'>
+                                                    <ProductVariants id={pro.id} />
+                                                </div>
                                                 <div className='card-body'>
                                                     <h3 className='card-title'><NavLink to={`/product/${pro.id}`}>{pro.name}</NavLink></h3>
                                                     <p className='card-text'>{pro.description}</p>

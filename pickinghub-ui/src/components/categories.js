@@ -88,6 +88,7 @@ class Categories extends Component{
                                                 <NavLink to={`/product/${p.id}`}>
                                                     <img src={p.random_product_image} style={product_image}/>
                                                     <h4>{p.name}</h4>
+                                                    
                                                 </NavLink>
                                                 
                                             </div>

@@ -1,0 +1,10 @@
+const productTypes = {
+
+    GET_PRODUCT_START : 'GET_PRODUCT_START',
+    GET_PRODUCT_SUCCESS : 'GET_PRODUCT_SUCCESS',
+    GET_PRODUCT_ERROR : 'GET_PRODUCT_ERROR',
+
+    SET_MAIN_PRODUCT_IMAGE : 'SET_MAIN_PRODUCT_IMAGE',
+}
+
+export default productTypes;

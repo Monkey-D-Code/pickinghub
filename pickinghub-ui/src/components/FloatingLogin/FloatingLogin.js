@@ -49,6 +49,8 @@ class FloatingLogin extends Component{
                 customerError,
 
             } = this.props;
+
+        
         return(
             <div>
                 {loginExpanded && <div className='login-body'>

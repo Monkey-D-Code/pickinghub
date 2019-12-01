@@ -59,6 +59,7 @@ class ProductDetailsSerializer(ModelSerializer):
     variants = VariantSerializer(many=True)
     reviews = ReviewSerializer(many=True)
     questions = QuestionSerializer(many=True)
+    random_product_image = URLField()
     class Meta:
         model = Product
         fields = '__all__'

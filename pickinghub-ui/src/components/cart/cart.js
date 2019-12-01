@@ -1,5 +1,12 @@
 import React,{Component} from 'react';
+import {connect} from 'react-redux';
+
 import './cart.css';
+
+import {
+    isAuthenticated,
+
+} from '../../Redux/User/User.selectors';
 
 
 class Cart extends Component{
@@ -14,8 +21,8 @@ class Cart extends Component{
 
     render=()=>{
         const {
-            loggedIn,
-            Customer,
+            isAuthenticated,
+           
             
 
         } = this.props;
@@ -24,7 +31,7 @@ class Cart extends Component{
             visible,
 
         } = this.state;
-        if(loggedIn()){
+        if(isAuthenticated){
             return(
                 <div>
                     {visible && <div className='cart-body'>
@@ -43,4 +50,11 @@ class Cart extends Component{
     }
 }
 
-export default Cart;
+const mapStateToProps = state => ({
+    isAuthenticated : isAuthenticated(state),
+})
+
+export default connect(
+    mapStateToProps,
+
+)(Cart);
