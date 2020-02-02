@@ -271,7 +271,7 @@ class Order(models.Model):
     time = models.TimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.customer
+        return str(self.sum)
 
     @property
     def sum(self):
@@ -299,7 +299,7 @@ class SingleOrder(models.Model):
         return self.sublet.selling_price * self.quantity
 
     def __str__(self):
-        return self.order
+        return str(self.order)
 
 
 class SpecialDeal(models.Model):

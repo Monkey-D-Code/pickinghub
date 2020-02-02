@@ -327,7 +327,11 @@ class OrderAdmin(admin.ModelAdmin):
                 "estimated_date","estimated_time"
             ),
         }),
-        
+        ("Total",{
+            "fields":(
+                "sum",
+            ),
+        }),
         ("Timestamp",{
             "fields":(
                 "date","time"
