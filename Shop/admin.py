@@ -180,6 +180,11 @@ class ProductAdmin(admin.ModelAdmin):
                 "company",
             ),
         }),
+        ('Seller',{
+            "fields":(
+                "seller",
+            ),
+        }),
         ("Information" , {
             "fields":(
                 "name","slug","description","warranty","support","trending"
@@ -193,6 +198,7 @@ class ProductAdmin(admin.ModelAdmin):
     )
     readonly_fields = ["date","time"]
     prepopulated_fields = {'slug': ('name',), }
+    list_filter = ['seller',]
 
 class SubletInline(admin.StackedInline):
     model = Sublet
@@ -235,7 +241,12 @@ class SubletAdmin(admin.ModelAdmin):
         }),
         ("Information",{
             "fields":(
-                "color_hex","max_retail_price","selling_price","stock"
+                "color_hex","stock"
+            )
+        }),
+        ("Price",{
+            "fields" : (
+                "max_retail_price","selling_price","purchase_price"
             )
         })
     )
@@ -293,3 +304,39 @@ class SpecialDealAdmin(admin.ModelAdmin):
         if(obj.has_expired):
             return mark_safe(f"<h4 style={style_expired}>Expired</h4>")
         return mark_safe(f"<p style={style_active}>Active</p>")
+
+
+class SingleOrderInline(admin.StackedInline):
+    model = SingleOrder
+    extra = 1
+
+
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    inlines = [SingleOrderInline,]
+    fieldsets = (
+        ("Customer", {
+            "fields": (
+               "customer",
+            ),
+        }),
+        ("status",{
+            "fields":(
+                ("saved","ordered","confirmed","dispatched","delivered",),
+            ),
+        }),
+        ("Deadline",{
+            "fields":(
+                "estimated_date","estimated_time"
+            ),
+        }),
+        
+        ("Timestamp",{
+            "fields":(
+                "date","time"
+            )
+        }),
+        
+        
+    )
+    readonly_fields = ["date","time"]

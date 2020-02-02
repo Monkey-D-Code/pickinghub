@@ -71,3 +71,13 @@ class Master(models.Model):
     
 
 
+class Seller(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    cover_image = models.URLField(max_length=400,null=True,blank=True)
+    contact_number = models.DecimalField(max_digits=10, decimal_places=0)
+    address = models.TextField(blank=True,null=True)
+
+    created_at = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.first_name} {self.user.last_name}"

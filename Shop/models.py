@@ -1,5 +1,8 @@
 from django.db import models
-from Accounts.models import Customer
+from Accounts.models import (
+    Customer,
+    Seller,
+)
 from random import randrange
 from datetime import *
 # Create your models here.
@@ -101,11 +104,16 @@ class Product(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE , blank=True, null=True)
     name = models.CharField(max_length=250 , unique=True)
-    slug = models.SlugField()
+    slug = models.SlugField(blank=True,null=True)
     description = models.TextField()
     trending = models.BooleanField(default=False)
     warranty = models.CharField(blank=True , max_length=120)
     support = models.CharField(blank=True , max_length=120)
+
+    seller = models.ForeignKey(Seller, on_delete=models.CASCADE,blank=True,null=True)
+
+    market_price = models.DecimalField(max_digits=7, decimal_places=2,blank=True,null=True)
+    selling_price = models.DecimalField(max_digits=7, decimal_places=2,blank=True,null=True)
 
     date = models.DateField(auto_now_add=True)
     time = models.TimeField(auto_now_add=True)
@@ -136,6 +144,13 @@ class Product(models.Model):
        if self.variant_set.count() > 0:
            return self.variant_set.all()[randrange(0 , self.variant_set.count())].random_variant_image
 
+class Image(models.Model):
+    product = models.ForeignKey(Product , on_delete=models.CASCADE)
+    image_url = models.URLField(max_length=400)
+    caption = models.TextField(blank=True,null=True)
+
+    def __str__(self):
+        return self.product
 
 class Variant(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -159,7 +174,8 @@ class Sublet(models.Model):
     color_hex = models.CharField(max_length=6,blank=True,null=True)
     max_retail_price = models.DecimalField(max_digits=7, decimal_places=2)
     selling_price = models.DecimalField(max_digits=7, decimal_places=2)
-    stock = models.IntegerField(blank=True)
+    purchase_price = models.DecimalField(max_digits=7, decimal_places=2,blank=True,null=True)
+
     def __str__(self):
         return self.value
     @property

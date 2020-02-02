@@ -20,6 +20,7 @@ admin.site.site_header = 'Pickinghub Admin'
 admin.site.site_title = 'Pickinghub Admin'
 
 urlpatterns = [
+    path('purchasing/',include('Purchasing.urls',namespace='Purchasing')),
     path('accounts/' , include('Accounts.urls' , namespace='Accounts')),
     path('shop/' , include('Shop.urls' , namespace='Shop')),
     path('' , include('Website.urls' , namespace='Website')),

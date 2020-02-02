@@ -24,4 +24,12 @@ urlpatterns = [
     path('api/search-products/',SearchProductsAPIView.as_view()),
 
     path('api/order/<int:customer_id>/new/',NewOrderAPIView.as_view()),
+
+    # seller related urls
+    path('api/seller/<int:seller_id>/products/',AllProductsOfSeller.as_view()),
+    path('api/category/all',CategoryListAPIView.as_view()),
+    path('api/company/all',CompanyListAPIView.as_view()),
+    path('api/product/create/',ProductCreateAPIView.as_view()),
+    path('api/variant/create/',VariantCreateAPIView.as_view()),
+    path('api/sublet/create/',SubletCreateAPIView.as_view()),
 ]

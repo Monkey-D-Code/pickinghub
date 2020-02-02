@@ -1,0 +1,7 @@
+const subletTypes = {
+    CREATE_SUBLET_START : 'CREATE_SUBLET_START',
+    CREATE_SUBLET_SUCCESS : 'CREATE_SUBLET_SUCCESS',
+    CREATE_SUBLET_ERROR : 'CREATE_SUBLET_ERROR',
+}
+
+export default subletTypes;

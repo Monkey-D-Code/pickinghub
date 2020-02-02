@@ -25,6 +25,10 @@ class SubletSerializer(ModelSerializer):
         model = Sublet
         fields = '__all__'
 
+class SubletCreateSerializer(ModelSerializer):
+    class Meta:
+        model = Sublet
+        fields = '__all__'
 
 class VariantSerializer(ModelSerializer):
     sublets = SubletSerializer(many=True)
@@ -32,6 +36,10 @@ class VariantSerializer(ModelSerializer):
         model = Variant
         fields = '__all__'
 
+class VariantCreateSerializer(ModelSerializer):
+    class Meta:
+        model = Variant
+        fields = '__all__'
 
 class InformationSerializer(ModelSerializer):
     class Meta:
@@ -74,10 +82,21 @@ class ProductSerializer(ModelSerializer):
         fields = '__all__'
         depth=1
 
+class ProductcreateSerializer(ModelSerializer):
+    class Meta:
+        model = Product
+        fields = '__all__'
 
 class CategorySerializer(ModelSerializer):
     
     all_products = ProductSerializer(many=True)
+    class Meta:
+        model = Category
+        fields = '__all__'
+
+class CategoryListSerializer(ModelSerializer):
+    
+    
     class Meta:
         model = Category
         fields = '__all__'
@@ -116,6 +135,7 @@ class OrderSerializer(ModelSerializer):
     class Meta:
         model = Order
         fields = '__all__'
+        depth = 2
 
 
 class SpecialDealSerializer(ModelSerializer):
@@ -126,3 +146,7 @@ class SpecialDealSerializer(ModelSerializer):
         fields = '__all__'
 
 
+class CompanySerializer(ModelSerializer):
+    class Meta:
+        model = Company
+        fields = '__all__'

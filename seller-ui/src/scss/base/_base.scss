@@ -1,0 +1,21 @@
+* {
+    margin : 0;
+    padding : 0;
+    box-sizing: border-box;
+}
+
+body {
+    h1{
+        font-family: $font_cursive_heading;
+    }
+    h2{
+        font-family: $font_heading;
+    }
+    p{
+        font-size: $font-paragraph;
+    }
+    
+    
+    
+}
+

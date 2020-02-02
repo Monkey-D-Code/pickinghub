@@ -8,6 +8,7 @@ from Website.models import (
 from rest_framework.generics import (
     ListCreateAPIView,
     RetrieveUpdateDestroyAPIView,
+    CreateAPIView,
 )
 from Shop.models import Department
 from django.views.generic import (
@@ -19,6 +20,7 @@ from rest_framework.views import (
 from rest_framework.response import (
     Response
 )
+from rest_framework import status
 from .serializers import *
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
@@ -84,3 +86,42 @@ class CustomerFromToken(APIView):
         customer = Customer.objects.get(user=user)
         serializer = CustomerDetailsSerializer(customer)
         return Response(serializer.data)
+
+
+class SellerCreateView(CreateAPIView):
+    queryset = Seller.objects.all()
+    serializer_class = SellerSerializer
+
+class SellerLogin(APIView):
+    def post(self,request):
+        key = request.data['token']
+        token = Token.objects.get(key=key)
+        user = User.objects.get(id=token.user_id)
+        seller = Seller.objects.get(user=user)
+        if seller:
+            serializer = SellerSerializer(seller)
+            return Response(serializer.data , status=status.HTTP_200_OK)
+        else:
+            return Response({'error':'Invalid seller username or password !'},status=status.HTTP_400_BAD_REQUEST)
+    
+        
+
+class SellerWebView(TemplateView):
+    template_name = 'seller-ui.html'
+
+
+class SellerProfileUpdateAPIView(APIView):
+    def post(self,request):
+        newSellerData = request.data
+        newUserData = newSellerData['user']
+        seller = Seller.objects.get(id=newSellerData['id'])
+        seller.contact_number = newSellerData['contact']
+        seller.cover_image = newSellerData['cover_image']
+        seller.save()
+        user = User.objects.get(id=seller.user_id)
+        user.first_name = newUserData['first_name']
+        user.last_name = newUserData['last_name']
+        user.email = newUserData['email']
+        user.save()
+        serializer = SellerSerializer(seller)
+        return Response(serializer.data , status=status.HTTP_200_OK)

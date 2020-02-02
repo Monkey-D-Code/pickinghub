@@ -1,0 +1,58 @@
+.variant-form{
+    .forms{
+        height: 75vh;
+        overflow: auto;
+        &::-webkit-scrollbar{
+            display: none;
+        }
+        &::scrollbar{
+            display: none;
+        }
+        &::-moz-scrollbar{
+            display: none;
+        }
+    }
+    h1{
+        @include gradientText;
+        margin : 0.5em auto;
+    }
+    .content{
+        display: flex;
+        justify-content: start;
+        .single-variant{
+            width : 300px;
+            form{
+                display: flex;
+                flex-flow: column;
+                align-items: center;
+            }
+        } 
+        .variants{
+            
+            margin-left : 1em;
+            .one-variant{
+                width : 150px;
+                cursor: pointer;
+                margin : 0.4em 0;
+                @include cardShadow1;
+                padding : 0.2em 0.4em;
+                transition: all 0.3s;
+                user-select: none;
+                h3{
+                    @include gradientText;
+                    font-family: $font_cursive_heading;
+                }
+                p{
+                    color : $color_bg_2;
+                    font-family: $font_heading;
+                }
+                &:hover{
+                    transform: translateY(-2px);
+                }
+                &:active{
+                    transform: translateY(2px);
+                }
+            }
+        }
+    } 
+}

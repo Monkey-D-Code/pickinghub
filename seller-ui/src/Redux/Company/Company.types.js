@@ -1,0 +1,9 @@
+const companyTypes = {
+        ALL_COMPANIES_START : 'ALL_COMPANIES_START',
+        ALL_COMPANIES_SUCCESS : 'ALL_COMPANIES_SUCCESS',
+        ALL_COMPANIES_ERROR : 'ALL_COMPANIES_ERROR',
+
+        SELECT_COMPANY : 'SELECT_COMPANY',
+}
+
+export default companyTypes;

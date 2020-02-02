@@ -1,0 +1,8 @@
+.alert-success{
+    background-color: darken($color_success,15%);
+    padding : 0.5em 0.3em;
+    h4{
+        font-family: $font_heading;
+        color: white;
+    }
+}

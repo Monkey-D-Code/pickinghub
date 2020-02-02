@@ -19,4 +19,8 @@ urlpatterns = [
     path('api/<int:pk>/get-profile/' , CustomerDetailsView.as_view(),name='get-profile'),
     path('api/<int:pk>/get-master/' , MasterDetailsView.as_view(),name='get-master'),
     path('api/customer-from-token/',CustomerFromToken.as_view(),name='get-customer'),
+    path('api/seller-register/',SellerCreateView.as_view(),name='seller-register'),
+    path('api/seller-login/',SellerLogin.as_view(),name='seller-login'),
+
+    path('api/seller-update/',SellerProfileUpdateAPIView.as_view()),
 ]

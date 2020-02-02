@@ -6,6 +6,7 @@ from Website.models import Brand
 from rest_framework.generics import (
     ListAPIView,
     RetrieveAPIView,
+    CreateAPIView,
 )
 from .serializers import *
 from rest_framework.views import (
@@ -142,3 +143,35 @@ class SearchProductsAPIView(ListAPIView):
     pagination_class = PageNumberPagination
     filter_backends = (SearchFilter,OrderingFilter)
     search_fields = ('name','company__full_name','category__name','category__demographic__name')
+
+
+class AllProductsOfSeller(ListCreateAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+    def get_queryset(self):
+        return self.queryset.filter(
+            seller=self.kwargs.get('seller_id')
+        )
+    
+
+class CategoryListAPIView(ListAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategoryListSerializer
+
+class CompanyListAPIView(ListAPIView):
+    queryset = Company.objects.all()
+    serializer_class = CompanySerializer
+
+
+class ProductCreateAPIView(CreateAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductcreateSerializer
+
+class VariantCreateAPIView(CreateAPIView):
+    queryset = Variant.objects.all()
+    serializer_class = VariantCreateSerializer
+
+class SubletCreateAPIView(CreateAPIView):
+    queryset = Sublet.objects.all()
+    serializer_class = SubletCreateSerializer

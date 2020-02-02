@@ -69,3 +69,31 @@ class MasterSerializer(ModelSerializer):
     class Meta:
         model = Master
         fields = '__all__'
+
+
+class SellerSerializer(ModelSerializer):
+    user = UserSerializer()
+    class Meta:
+        model = Seller
+        fields = '__all__'
+
+
+    def create(self,validated_data):
+        user_data = validated_data['user']
+        user = User.objects.create(
+            first_name = user_data["first_name"],
+            last_name = user_data["last_name"],
+            username = user_data["username"],
+            email = user_data["email"],
+        )
+        user.set_password(user_data['password'])
+        user.save()
+        token = Token.objects.create(user=user)
+        seller = Seller.objects.create(
+            user = user,
+            cover_image = validated_data['cover_image'],
+            contact_number = validated_data['contact_number'],
+            address = validated_data['address'],
+        )
+        serializer = SellerSerializer(seller)
+        return serializer.data

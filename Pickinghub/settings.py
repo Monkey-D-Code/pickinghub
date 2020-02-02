@@ -14,9 +14,9 @@ STATIC_DIR = os.path.join(BASE_DIR , 'static')
 SECRET_KEY = '8h2$+r$o60=dhr_bt1-cdrvz0li!*&9#xnbpc_mhg$m*)%blw)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['pickinghub.pythonanywhere.com']
+# ALLOWED_HOSTS = ['pickinghub.pythonanywhere.com']
 
 
 # Application definition
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'Accounts',
     'Website',
     'Shop',
+    'Purchasing',
 ]
 
 MIDDLEWARE = [
@@ -83,9 +84,10 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000'
+    'http://localhost:3000',
+
 ]
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators

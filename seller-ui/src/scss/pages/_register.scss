@@ -1,0 +1,35 @@
+.register{
+    width : 100vw;
+    min-height: 100vh;
+    background-image: $bg_pattern_1;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    h1{
+        margin : 1em auto;
+        @include gradientText;
+        font-size : 3em;
+        @media (max-width : 420px){
+            font-size: 1.5em;
+        }
+    }
+    .register-form{
+       display: flex;
+       justify-content: space-evenly;
+       @media (max-width : 768px){
+           flex-flow: column;
+           align-items: center;
+       }
+        .form-group{
+            width : 300px;
+            display: flex;
+            flex-flow: column;
+            margin : 1em;
+            .heading{
+                font-size: 1.1em;
+                color : rgba(lighten($color_bg_1 , 10%),0.6);
+                
+            }
+        }
+    }
+}

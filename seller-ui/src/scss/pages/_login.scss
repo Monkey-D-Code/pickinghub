@@ -1,0 +1,27 @@
+.login{
+    width : 100vw;
+    height: 100vh;
+    
+    margin : 0 auto;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    background-image: $bg_pattern_1;
+    h1{
+        @include gradientText;
+        font-size : 3em;
+        @media (max-width : 420px){
+            font-size: 1.5em;
+        }
+    }
+    form{
+        display: flex;
+        flex-flow: column;
+        margin-top: 1.5em;
+        
+        
+        
+    }
+    
+}

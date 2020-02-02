@@ -1,0 +1,28 @@
+.form-errors{
+   width : 90vw;
+   margin : 1em auto;
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   align-items: center;
+   .error{
+      width: 300px;
+      
+      margin : 0.4em 10px;
+      padding : 0.4em 1em;
+      background-image: linear-gradient(
+         to right,
+         rgba($color_bg_3 , 0.7),
+         rgba($color_bg_2 , 0.7),
+      );
+      color : $color_font_1;
+      .field{
+         font-family: $font_heading;
+         font-weight: bold;
+      }
+      P{
+         font-family: $font_paragraph;
+         font-size : 1.2em;
+      }
+   }
+}

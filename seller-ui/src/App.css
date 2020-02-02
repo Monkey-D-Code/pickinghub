@@ -1,0 +1,505 @@
+@import url("https://fonts.googleapis.com/css?family=Cookie|Permanent+Marker|Titillium+Web&display=swap");
+.input {
+  margin: 0.5em 0;
+  width: 300px;
+  padding: 0.4em 0.6em;
+  font-size: 1.4em;
+  font-family: "Cookie", cursive;
+  border: 0;
+  -webkit-box-shadow: 4px 6px 5px 0px rgba(219, 22, 47, 0.2);
+  -moz-box-shadow: 4px 6px 5px 0px rgba(219, 22, 47, 0.2);
+  box-shadow: 4px 6px 5px 0px rgba(219, 22, 47, 0.2);
+  color: #610345;
+  outline-color: #610345; }
+  .input::placeholder {
+    color: #DB162F; }
+  .input-webkit-::placeholder {
+    color: #DB162F; }
+  .input-moz-::placeholder {
+    color: #DB162F; }
+
+.login-btn {
+  padding: 0.4em 0.6em;
+  font-size: 1.4em;
+  font-family: "Cookie", cursive;
+  border: none;
+  background-image: linear-gradient(to right, #610345, #DB162F);
+  color: white;
+  cursor: pointer;
+  outline-color: #DB162F;
+  transition: all 0.5s; }
+  .login-btn:hover {
+    -webkit-box-shadow: 4px 6px 31px -5px rgba(97, 3, 69, 0.48);
+    -moz-box-shadow: 4px 6px 31px -5px rgba(97, 3, 69, 0.48);
+    box-shadow: 4px 6px 31px -5px rgba(97, 3, 69, 0.48); }
+  .login-btn:active {
+    transform: translateY(2px);
+    -webkit-box-shadow: 4px 6px 5px 0px rgba(97, 3, 69, 0.48);
+    -moz-box-shadow: 4px 6px 5px 0px rgba(97, 3, 69, 0.48);
+    box-shadow: 4px 6px 5px 0px rgba(97, 3, 69, 0.48); }
+
+.message {
+  display: flex;
+  width: 300px;
+  justify-content: space-between; }
+  .message h3, .message a {
+    font-size: 0.8em;
+    font-family: "Titillium Web", sans-serif; }
+  .message h3 {
+    color: #610345; }
+  .message a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #DB162F; }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+body h1 {
+  font-family: "Permanent Marker", cursive; }
+
+body h2 {
+  font-family: "Titillium Web", sans-serif; }
+
+body p {
+  font-size: "Cookie", cursive; }
+
+.navigation-bar {
+  position: sticky;
+  top: 0;
+  width: 100vw;
+  background-image: linear-gradient(to right, #610345, #DB162F);
+  padding: 1em;
+  display: flex;
+  align-items: center; }
+  .navigation-bar .brand {
+    width: 40%; }
+    .navigation-bar .brand h1 {
+      color: white; }
+  .navigation-bar .menu {
+    width: 45%; }
+    .navigation-bar .menu ul {
+      list-style-type: none;
+      display: flex;
+      justify-content: flex-end; }
+      .navigation-bar .menu ul li {
+        margin: 0 0.6em;
+        cursor: pointer; }
+        .navigation-bar .menu ul li a {
+          text-decoration: none;
+          font-family: "Titillium Web", sans-serif;
+          color: white;
+          transition: all 0.3s; }
+          .navigation-bar .menu ul li a:hover {
+            color: #fa69cf; }
+  .navigation-bar .auth {
+    width: 15%; }
+    .navigation-bar .auth ul {
+      list-style-type: none;
+      display: flex;
+      justify-content: flex-end; }
+      .navigation-bar .auth ul li {
+        margin: 0 0.6em;
+        font-family: "Cookie", cursive;
+        color: white;
+        font-size: 1.3em;
+        cursor: pointer;
+        box-sizing: content-box;
+        transition: all 0.3s; }
+        .navigation-bar .auth ul li a {
+          text-decoration: none;
+          font-family: "Cookie", cursive;
+          color: white; }
+        .navigation-bar .auth ul li:hover {
+          border-top: 1px solid white;
+          border-bottom: 1px solid white; }
+
+.form-errors {
+  width: 90vw;
+  margin: 1em auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center; }
+  .form-errors .error {
+    width: 300px;
+    margin: 0.4em 10px;
+    padding: 0.4em 1em;
+    background-image: linear-gradient(to right, rgba(224, 54, 22, 0.7), rgba(219, 22, 47, 0.7));
+    color: #FFF689; }
+    .form-errors .error .field {
+      font-family: "Titillium Web", sans-serif;
+      font-weight: bold; }
+    .form-errors .error P {
+      font-family: "Cookie", cursive;
+      font-size: 1.2em; }
+
+.server-error {
+  width: 300px;
+  margin: 1em auto;
+  background-image: linear-gradient(to right, rgba(219, 22, 47, 0.8), rgba(224, 54, 22, 0.8));
+  padding: 0.4em 1em;
+  color: #FFF689;
+  font-family: "Cookie", cursive;
+  font-size: 1.3em; }
+
+.seller-error {
+  margin: 1em 0;
+  font-family: "Cookie", cursive;
+  color: #c93014;
+  width: 300px; }
+
+.token-error {
+  margin: 1em 0;
+  font-family: "Cookie", cursive;
+  color: #E03616;
+  width: 300px; }
+
+.alert-success {
+  background-color: #72971c;
+  padding: 0.5em 0.3em; }
+  .alert-success h4 {
+    font-family: "Titillium Web", sans-serif;
+    color: white; }
+
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); }
+
+.next-btn {
+  font-family: "Cookie", cursive;
+  padding: 0.4em 0.3em;
+  font-size: 1.4em;
+  background-image: linear-gradient(to right, #DB162F, #E03616);
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s; }
+  .next-btn:hover {
+    transform: translateY(-2px); }
+  .next-btn:active {
+    transform: translateY(2px); }
+  .next-btn:disabled {
+    background-color: black; }
+
+.all-products {
+  padding: 0 1em;
+  position: relative;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap; }
+  .all-products .single-product {
+    width: 300px; }
+    .all-products .single-product img {
+      width: 300px;
+      height: 400px;
+      object-fit: cover; }
+    .all-products .single-product h3 {
+      font-family: "Permanent Marker", cursive;
+      background-image: linear-gradient(to right, #610345, #DB162F);
+      width: fit-content;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -moz-background-clip: text;
+      color: transparent; }
+
+.category-list {
+  display: flex;
+  flex-flow: column;
+  align-items: center; }
+  .category-list h1 {
+    background-image: linear-gradient(to right, #610345, #DB162F);
+    width: fit-content;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    color: transparent; }
+  .category-list .list {
+    width: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='152' height='152' viewBox='0 0 152 152'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='temple' fill='%23610345' fill-opacity='0.06'%3E%3Cpath d='M152 150v2H0v-2h28v-8H8v-20H0v-2h8V80h42v20h20v42H30v8h90v-8H80v-42h20V80h42v40h8V30h-8v40h-42V50H80V8h40V0h2v8h20v20h8V0h2v150zm-2 0v-28h-8v20h-20v8h28zM82 30v18h18V30H82zm20 18h20v20h18V30h-20V10H82v18h20v20zm0 2v18h18V50h-18zm20-22h18V10h-18v18zm-54 92v-18H50v18h18zm-20-18H28V82H10v38h20v20h38v-18H48v-20zm0-2V82H30v18h18zm-20 22H10v18h18v-18zm54 0v18h38v-20h20V82h-18v20h-20v20H82zm18-20H82v18h18v-18zm2-2h18V82h-18v18zm20 40v-18h18v18h-18zM30 0h-2v8H8v20H0v2h8v40h42V50h20V8H30V0zm20 48h18V30H50v18zm18-20H48v20H28v20H10V30h20V10h38v18zM30 50h18v18H30V50zm-2-40H10v18h18V10z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center; }
+    .category-list .list .single-category {
+      cursor: pointer;
+      width: 300px;
+      -webkit-box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.23);
+      -moz-box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.23);
+      box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.23);
+      margin: 0.5em 0;
+      transition: all 0.3s; }
+      .category-list .list .single-category img {
+        width: 300px;
+        height: 200px;
+        object-fit: cover; }
+      .category-list .list .single-category .info {
+        display: flex;
+        justify-content: space-around;
+        align-items: center; }
+        .category-list .list .single-category .info h3 {
+          font-family: "Titillium Web", sans-serif;
+          color: #DB162F;
+          transition: all 0.3s; }
+        .category-list .list .single-category .info p {
+          font-family: "Cookie", cursive;
+          color: #628218; }
+      .category-list .list .single-category:hover .info h3 {
+        letter-spacing: 3px; }
+
+.all-companies {
+  display: flex;
+  flex-flow: column;
+  align-items: center; }
+  .all-companies h1 {
+    background-image: linear-gradient(to right, #610345, #DB162F);
+    width: fit-content;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    color: transparent; }
+  .all-companies .company-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center; }
+    .all-companies .company-list .single-company {
+      -webkit-box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.3);
+      -moz-box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.3);
+      box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      width: 300px;
+      margin: 0.5em 0;
+      transition: all 0.3s; }
+      .all-companies .company-list .single-company img {
+        width: 300px; }
+      .all-companies .company-list .single-company .info {
+        padding: 0.5em 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly; }
+        .all-companies .company-list .single-company .info img {
+          height: 50px;
+          width: 50px;
+          object-fit: cover;
+          border-radius: 50%;
+          margin-right: 0.4em; }
+        .all-companies .company-list .single-company .info h3 {
+          font-family: "Cookie", cursive;
+          font-size: 1.5em;
+          color: #DB162F; }
+      .all-companies .company-list .single-company:hover {
+        transform: translateY(-4px); }
+      .all-companies .company-list .single-company:active {
+        transform: translateY(4px); }
+
+.variant-form .forms {
+  height: 75vh;
+  overflow: auto; }
+  .variant-form .forms::-webkit-scrollbar {
+    display: none; }
+  .variant-form .forms::scrollbar {
+    display: none; }
+  .variant-form .forms::-moz-scrollbar {
+    display: none; }
+
+.variant-form h1 {
+  background-image: linear-gradient(to right, #610345, #DB162F);
+  width: fit-content;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  color: transparent;
+  margin: 0.5em auto; }
+
+.variant-form .content {
+  display: flex;
+  justify-content: start; }
+  .variant-form .content .single-variant {
+    width: 300px; }
+    .variant-form .content .single-variant form {
+      display: flex;
+      flex-flow: column;
+      align-items: center; }
+  .variant-form .content .variants {
+    margin-left: 1em; }
+    .variant-form .content .variants .one-variant {
+      width: 150px;
+      cursor: pointer;
+      margin: 0.4em 0;
+      -webkit-box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.3);
+      -moz-box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.3);
+      box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.3);
+      padding: 0.2em 0.4em;
+      transition: all 0.3s;
+      user-select: none; }
+      .variant-form .content .variants .one-variant h3 {
+        background-image: linear-gradient(to right, #610345, #DB162F);
+        width: fit-content;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -moz-background-clip: text;
+        color: transparent;
+        font-family: "Permanent Marker", cursive; }
+      .variant-form .content .variants .one-variant p {
+        color: #DB162F;
+        font-family: "Titillium Web", sans-serif; }
+      .variant-form .content .variants .one-variant:hover {
+        transform: translateY(-2px); }
+      .variant-form .content .variants .one-variant:active {
+        transform: translateY(2px); }
+
+.sublet-form form {
+  display: flex;
+  flex-flow: column; }
+
+.login {
+  width: 100vw;
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='152' height='152' viewBox='0 0 152 152'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='temple' fill='%23610345' fill-opacity='0.06'%3E%3Cpath d='M152 150v2H0v-2h28v-8H8v-20H0v-2h8V80h42v20h20v42H30v8h90v-8H80v-42h20V80h42v40h8V30h-8v40h-42V50H80V8h40V0h2v8h20v20h8V0h2v150zm-2 0v-28h-8v20h-20v8h28zM82 30v18h18V30H82zm20 18h20v20h18V30h-20V10H82v18h20v20zm0 2v18h18V50h-18zm20-22h18V10h-18v18zm-54 92v-18H50v18h18zm-20-18H28V82H10v38h20v20h38v-18H48v-20zm0-2V82H30v18h18zm-20 22H10v18h18v-18zm54 0v18h38v-20h20V82h-18v20h-20v20H82zm18-20H82v18h18v-18zm2-2h18V82h-18v18zm20 40v-18h18v18h-18zM30 0h-2v8H8v20H0v2h8v40h42V50h20V8H30V0zm20 48h18V30H50v18zm18-20H48v20H28v20H10V30h20V10h38v18zM30 50h18v18H30V50zm-2-40H10v18h18V10z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+  .login h1 {
+    background-image: linear-gradient(to right, #610345, #DB162F);
+    width: fit-content;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    color: transparent;
+    font-size: 3em; }
+    @media (max-width: 420px) {
+      .login h1 {
+        font-size: 1.5em; } }
+  .login form {
+    display: flex;
+    flex-flow: column;
+    margin-top: 1.5em; }
+
+.register {
+  width: 100vw;
+  min-height: 100vh;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='152' height='152' viewBox='0 0 152 152'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='temple' fill='%23610345' fill-opacity='0.06'%3E%3Cpath d='M152 150v2H0v-2h28v-8H8v-20H0v-2h8V80h42v20h20v42H30v8h90v-8H80v-42h20V80h42v40h8V30h-8v40h-42V50H80V8h40V0h2v8h20v20h8V0h2v150zm-2 0v-28h-8v20h-20v8h28zM82 30v18h18V30H82zm20 18h20v20h18V30h-20V10H82v18h20v20zm0 2v18h18V50h-18zm20-22h18V10h-18v18zm-54 92v-18H50v18h18zm-20-18H28V82H10v38h20v20h38v-18H48v-20zm0-2V82H30v18h18zm-20 22H10v18h18v-18zm54 0v18h38v-20h20V82h-18v20h-20v20H82zm18-20H82v18h18v-18zm2-2h18V82h-18v18zm20 40v-18h18v18h-18zM30 0h-2v8H8v20H0v2h8v40h42V50h20V8H30V0zm20 48h18V30H50v18zm18-20H48v20H28v20H10V30h20V10h38v18zM30 50h18v18H30V50zm-2-40H10v18h18V10z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  display: flex;
+  flex-flow: column;
+  justify-content: center; }
+  .register h1 {
+    margin: 1em auto;
+    background-image: linear-gradient(to right, #610345, #DB162F);
+    width: fit-content;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    color: transparent;
+    font-size: 3em; }
+    @media (max-width: 420px) {
+      .register h1 {
+        font-size: 1.5em; } }
+  .register .register-form {
+    display: flex;
+    justify-content: space-evenly; }
+    @media (max-width: 768px) {
+      .register .register-form {
+        flex-flow: column;
+        align-items: center; } }
+    .register .register-form .form-group {
+      width: 300px;
+      display: flex;
+      flex-flow: column;
+      margin: 1em; }
+      .register .register-form .form-group .heading {
+        font-size: 1.1em;
+        color: rgba(146, 5, 104, 0.6); }
+
+.profile {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%); }
+  .profile .info {
+    display: flex;
+    flex-flow: column;
+    align-items: center; }
+  .profile .controls {
+    display: flex;
+    text-align: center;
+    justify-content: space-evenly; }
+    .profile .controls a {
+      font-weight: 300;
+      color: white;
+      width: 100%;
+      padding: 0.4em 0.5em;
+      margin: 0.5em 0; }
+      .profile .controls a:first-child {
+        background-color: #82ad20; }
+      .profile .controls a:last-child {
+        background-color: #fc9000; }
+  .profile a {
+    text-decoration: none;
+    font-family: "Titillium Web", sans-serif;
+    color: #DB162F; }
+  .profile .profile-img {
+    height: 300px;
+    width: 300px;
+    object-fit: cover;
+    border-radius: 50%;
+    -webkit-box-shadow: 3px 3px 5px 2px rgba(0, 0, 0, 0.26);
+    -moz-box-shadow: 3px 3px 5px 2px rgba(0, 0, 0, 0.26);
+    box-shadow: 3px 3px 5px 2px rgba(0, 0, 0, 0.26); }
+  .profile h1 {
+    margin: 0 auto;
+    background-image: linear-gradient(to right, #610345, #DB162F);
+    width: fit-content;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    color: transparent;
+    font-size: 3em; }
+  .profile h3 {
+    font-family: "Cookie", cursive;
+    color: #610345;
+    font-size: 1.5em; }
+  .profile p {
+    font-family: "Cookie", cursive;
+    color: #DB162F;
+    font-size: 1.4em; }
+
+.update-profile {
+  display: flex;
+  justify-content: space-evenly; }
+  @media (max-width: 768px) {
+    .update-profile {
+      flex-flow: column;
+      align-items: center; } }
+  .update-profile form {
+    display: flex;
+    flex-flow: column;
+    align-items: center; }
+    .update-profile form h1 {
+      margin: 0.5em auto;
+      background-image: linear-gradient(to right, #610345, #DB162F);
+      width: fit-content;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -moz-background-clip: text;
+      color: transparent;
+      font-size: 2em; }
+      @media (max-width: 420px) {
+        .update-profile form h1 {
+          font-size: 1.5em; } }
+  .update-profile .form-group {
+    width: 300px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    margin: 1em; }
+    .update-profile .form-group .heading {
+      font-size: 1.1em;
+      color: rgba(146, 5, 104, 0.6); }

@@ -1,0 +1,14 @@
+.server-error{
+    width : 300px;
+    margin : 1em auto;
+    background-image: linear-gradient(
+        to right,
+        rgba($color_bg_2 , 0.8),
+        rgba($color_bg_3 , 0.8),
+    );
+    padding : 0.4em 1em;    
+    color: $color_font_1;
+    font-family: $font_paragraph;
+    font-size: 1.3em;
+
+}

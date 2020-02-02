@@ -1,0 +1,33 @@
+.update-profile{
+    display: flex;
+    justify-content: space-evenly;
+    @media (max-width : 768px){
+        flex-flow: column;
+        align-items: center;
+    }
+    form{
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        h1{
+            margin : 0.5em auto;
+            @include gradientText;
+            font-size : 2em;
+            @media (max-width : 420px){
+                font-size: 1.5em;
+            }
+        }
+    }
+     .form-group{
+         width : 300px;
+         display: flex;
+         flex-flow: column;
+         align-items: center;
+         margin : 1em;
+         .heading{
+             font-size: 1.1em;
+             color : rgba(lighten($color_bg_1 , 10%),0.6);
+             
+         }
+     }
+}

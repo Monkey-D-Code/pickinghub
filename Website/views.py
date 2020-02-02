@@ -20,6 +20,15 @@ class HomeView(TemplateView):
         context['departments'] = Department.objects.all()
         return context
 
+class SellerView(TemplateView):
+    template_name = 'seller-ui.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["brand"] = Brand.objects.get(id=1)
+        context['departments'] = Department.objects.all()
+        return context
+
 class AboutView(TemplateView):
     template_name = 'Website/about.html'
 

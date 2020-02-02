@@ -1,0 +1,62 @@
+.input {
+    margin : 0.5em 0;
+    width : 300px;
+    padding : 0.4em 0.6em;
+    font-size: 1.4em;
+    font-family: $font_paragraph;
+    border : 0;
+    @include inputShadow($color_bg_2);
+    color : $color_bg_1;
+    outline-color: $color_bg_1;
+    &::placeholder{
+        color: $color_bg_2;
+    }
+    &-webkit-::placeholder{
+        color: $color_bg_2;
+    }
+    &-moz-::placeholder{
+        color: $color_bg_2;
+    }
+}
+
+.login-btn{
+    padding : 0.4em 0.6em;
+    font-size: 1.4em;
+    font-family: $font_paragraph;
+    border:none;
+    background-image: linear-gradient(
+        to right,
+        $color_bg_1,
+        $color_bg_2,
+
+    );
+    color: white;
+    cursor: pointer;
+    outline-color: $color_bg_2;
+    transition: all 0.5s;
+    &:hover {
+        @include btnHoverShadow($color_bg_1);
+    }
+    &:active {
+        transform: translateY(2px);
+        @include btnActiveShadow($color_bg_1);
+    }
+}
+
+.message{
+    display: flex;
+    width : 300px;
+    justify-content: space-between;
+    h3, a{
+        font-size: 0.8em;
+        font-family: $font_heading;
+    }
+    h3{
+        color : $color_bg_1;
+    }
+    a{
+        text-decoration: none;
+        font-weight: bold;
+        color: $color_bg_2;
+    }
+}

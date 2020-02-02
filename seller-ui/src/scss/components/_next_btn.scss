@@ -1,0 +1,24 @@
+.next-btn{
+    font-family: $font_paragraph;
+    padding : 0.4em 0.3em;
+    font-size: 1.4em;
+    background-image: linear-gradient(
+        to right,
+        $color_bg_2,
+        $color_bg_3,
+    );
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s;
+    &:hover{
+        transform: translateY(-2px);
+    }
+    &:active{
+        transform: translateY(2px);
+    }
+    &:disabled{
+        background-color: black;
+        
+    }
+}

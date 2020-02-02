@@ -1,0 +1,37 @@
+@mixin  gradientText {
+    background-image: linear-gradient(
+        to right,
+        $color_bg_1,
+        $color_bg_2,
+    );
+    width: fit-content;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    color: transparent;
+}
+
+@mixin inputShadow($color){
+    -webkit-box-shadow: 4px 6px 5px 0px rgba($color,0.2);
+    -moz-box-shadow: 4px 6px 5px 0px rgba($color,0.2);
+    box-shadow: 4px 6px 5px 0px rgba($color,0.2);
+}
+
+@mixin btnHoverShadow($color){
+    -webkit-box-shadow: 4px 6px 31px -5px rgba($color,0.48);
+    -moz-box-shadow: 4px 6px 31px -5px rgba($color,0.48);
+    box-shadow: 4px 6px 31px -5px rgba($color,0.48);
+
+}
+
+@mixin btnActiveShadow($color){
+    -webkit-box-shadow: 4px 6px 5px 0px rgba($color,0.48);
+    -moz-box-shadow: 4px 6px 5px 0px rgba($color,0.48);
+    box-shadow: 4px 6px 5px 0px rgba($color,0.48);
+}
+
+@mixin cardShadow1 {
+    -webkit-box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.3);
+    -moz-box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.3);
+    box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.3);
+}
