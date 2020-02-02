@@ -175,3 +175,11 @@ class VariantCreateAPIView(CreateAPIView):
 class SubletCreateAPIView(CreateAPIView):
     queryset = Sublet.objects.all()
     serializer_class = SubletCreateSerializer
+
+class AllOrdersApiView(ListAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+
+    def get_queryset(self):
+        return self.queryset.filter(customer=self.kwargs.get('customer_id'))
+    

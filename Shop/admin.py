@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import *
+from nested_admin import NestedModelAdmin, NestedStackedInline, NestedTabularInline
 from django.utils.safestring import mark_safe
 # Register your models here.
 @admin.register(Department)
@@ -194,6 +195,11 @@ class ProductAdmin(admin.ModelAdmin):
                 "name","slug","description","warranty","support","trending"
             )
         }),
+        ("Price" , {
+            "fields":(
+                "selling_price","market_price"
+            )
+        }),
         ("Time" , {
             "fields" : (
                 "date" , "time",
@@ -202,17 +208,22 @@ class ProductAdmin(admin.ModelAdmin):
     )
     readonly_fields = ["date","time"]
     prepopulated_fields = {'slug': ('name',), }
-    list_filter = ['seller',]
+    list_filter = ['seller','category']
 
-class SubletInline(admin.StackedInline):
+class ProductImagesInline(NestedTabularInline):
+    model = ProductImage
+    extra = 5
+
+class SubletInline(NestedStackedInline):
     model = Sublet
     extra = 2
+    inlines = [ProductImagesInline]
 
 
 
 
 @admin.register(Variant)
-class VariantAdmin(admin.ModelAdmin):
+class VariantAdmin(NestedModelAdmin):
     inlines = [SubletInline,]
     fieldsets = (
         ("Product", {
@@ -227,33 +238,15 @@ class VariantAdmin(admin.ModelAdmin):
         })
     )
     list_display = ["product" , "label"]
-    search_fields = ("product",)
+    search_fields = ("product__name",)
+    list_filter = ['product']
 
 class ProductImageInline(admin.TabularInline):
     model = ProductImage
     extra = 4
 
 
-@admin.register(Sublet)
-class SubletAdmin(admin.ModelAdmin):
-    inlines = [ProductImageInline,]
-    fieldsets = (
-        ("Variant", {
-            "fields": (
-                "variant",
-            ),
-        }),
-        ("Information",{
-            "fields":(
-                "color_hex","stock"
-            )
-        }),
-        ("Price",{
-            "fields" : (
-                "max_retail_price","selling_price","purchase_price"
-            )
-        })
-    )
+
     
 @admin.register(SpecialDeal)
 class SpecialDealAdmin(admin.ModelAdmin):
@@ -343,4 +336,7 @@ class OrderAdmin(admin.ModelAdmin):
         
         
     )
-    readonly_fields = ["date","time"]
+    readonly_fields = ["date","time","sum"]
+    list_display = ['sum' , "customer"]
+    list_filter = ['date']
+    
