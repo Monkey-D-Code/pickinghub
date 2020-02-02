@@ -165,10 +165,14 @@ class VariantInline(admin.StackedInline):
     model = Variant
     extra = 2
 
+class ImageInline(admin.StackedInline):
+    model = Image
+    extra = 3
+
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    inlines = [InformationInline,VariantInline,DiscountOfferInline,ReviewInline,QuestionInline]
+    inlines = [ImageInline,InformationInline,VariantInline,DiscountOfferInline,ReviewInline,QuestionInline]
     fieldsets = (
         ("Category", {
             "fields": (
