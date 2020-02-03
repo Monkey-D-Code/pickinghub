@@ -177,9 +177,13 @@ class SubletCreateAPIView(CreateAPIView):
     serializer_class = SubletCreateSerializer
 
 class AllOrdersApiView(ListAPIView):
-    queryset = Order.objects.all()
+    queryset = Order.objects.all().order_by("-date" , "-time")
     serializer_class = OrderSerializer
 
     def get_queryset(self):
         return self.queryset.filter(customer=self.kwargs.get('customer_id'))
+
+class OrderDetailsAPIView(RetrieveAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderDetailsSerializer
     

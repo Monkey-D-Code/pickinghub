@@ -187,6 +187,10 @@ class Sublet(models.Model):
             return self.productimage_set.all()[randrange(0 , self.productimage_set.count())].image_url
         return False
 
+    @property
+    def product(self):
+        return self.variant.product
+
 class ProductImage(models.Model):
     sublet = models.ForeignKey(Sublet , on_delete=models.CASCADE)
     image_url = models.URLField(max_length=700)
@@ -272,6 +276,8 @@ class Order(models.Model):
 
     def __str__(self):
         return str(self.sum)
+
+
 
     @property
     def sum(self):

@@ -16,7 +16,7 @@ SECRET_KEY = '8h2$+r$o60=dhr_bt1-cdrvz0li!*&9#xnbpc_mhg$m*)%blw)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['pickinghub.pythonanywhere.com']
+ALLOWED_HOSTS = ['pickinghub.pythonanywhere.com' , '192.168.0.103' , '127.0.0.1']
 
 
 # Application definition

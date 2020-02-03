@@ -341,6 +341,7 @@ class OrderAdmin(admin.ModelAdmin):
         
     )
     readonly_fields = ["date","time","sum"]
-    list_display = ['sum' , "customer"]
-    list_filter = ['date']
+    list_display = ['sum' , "customer" , "date" , "time" ,]
+    list_filter = ['date' , "confirmed" , "dispatched","delivered"]
+    search_fields = ("customer__user__first_name","customer__user__last_name",)
     

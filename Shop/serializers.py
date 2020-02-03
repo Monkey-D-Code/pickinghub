@@ -6,6 +6,13 @@ from rest_framework.serializers import (
 )
 from .models import *
 
+class ProductSerializer(ModelSerializer):
+    random_product_image = URLField()
+    class Meta:
+        model = Product
+        fields = '__all__'
+        depth=1
+
 class DepartmentSerializer(ModelSerializer):
     class Meta:
         model = Department
@@ -21,6 +28,7 @@ class ProductImageSerializer(ModelSerializer):
 
 class SubletSerializer(ModelSerializer):
     productimages = ProductImageSerializer(many=True)
+    product = ProductSerializer()
     class Meta:
         model = Sublet
         fields = '__all__'
@@ -75,12 +83,7 @@ class ProductDetailsSerializer(ModelSerializer):
 
 
 
-class ProductSerializer(ModelSerializer):
-    random_product_image = URLField()
-    class Meta:
-        model = Product
-        fields = '__all__'
-        depth=1
+
 
 class ProductcreateSerializer(ModelSerializer):
     class Meta:
@@ -123,20 +126,33 @@ class DepartmentDetailSerializer(ModelSerializer):
 
 
 class SingleOrderSerializer(ModelSerializer):
+    
     total = DecimalField(max_digits=9,decimal_places=2)
     class Meta:
         model = SingleOrder
         fields = '__all__'
 
+class SingleOrderDetailsSerializer(ModelSerializer):
+    sublet = SubletSerializer()
+    total = DecimalField(max_digits=9,decimal_places=2)
+    class Meta:
+        model = SingleOrder
+        fields = '__all__'
 
 class OrderSerializer(ModelSerializer):
     sum = DecimalField(max_digits=9,decimal_places=2)
-    orders = SingleOrderSerializer(many=True)
+    orders = SingleOrderDetailsSerializer(many=True)
     class Meta:
         model = Order
         fields = '__all__'
         depth = 2
 
+class OrderDetailsSerializer(ModelSerializer):
+    sum = DecimalField(max_digits=9,decimal_places=2)
+    orders = SingleOrderDetailsSerializer(many=True)
+    class Meta:
+        model = Order
+        fields = '__all__'
 
 class SpecialDealSerializer(ModelSerializer):
     has_expired = BooleanField()
