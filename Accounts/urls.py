@@ -23,4 +23,7 @@ urlpatterns = [
     path('api/seller-login/',SellerLogin.as_view(),name='seller-login'),
 
     path('api/seller-update/',SellerProfileUpdateAPIView.as_view()),
+
+    path('api/customer/<int:customer_id>/address/' ,CustomerAddressCreateAPIView.as_view()),
+    path('api/customer/<int:customer_id>/contact/',CustomerContactCreateAPIView.as_view()),
 ]

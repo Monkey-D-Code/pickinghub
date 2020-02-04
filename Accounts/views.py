@@ -125,3 +125,18 @@ class SellerProfileUpdateAPIView(APIView):
         user.save()
         serializer = SellerSerializer(seller)
         return Response(serializer.data , status=status.HTTP_200_OK)
+
+
+class CustomerAddressCreateAPIView(ListCreateAPIView):
+    queryset = Address.objects.all()
+    serializer_class = AddressSerializer
+
+    def get_queryset(self):
+        return self.queryset.filter(customer=self.kwargs.get('customer_id'))
+    
+class CustomerContactCreateAPIView(ListCreateAPIView):
+    queryset = Contact.objects.all()
+    serializer_class = ContactSerializer
+
+    def get_queryset(self):
+        return self.queryset.filter(customer=self.kwargs.get('customer_id'))

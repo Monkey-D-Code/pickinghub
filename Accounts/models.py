@@ -27,7 +27,7 @@ class Contact(models.Model):
     customer = models.ForeignKey(Customer , on_delete=models.CASCADE)
     label = models.CharField(max_length=150)
     number = models.DecimalField(max_digits=10, decimal_places=0)
-
+    active = models.BooleanField(default=False)
     def __str__(self):
         return self.label
 
@@ -41,7 +41,7 @@ class Address(models.Model):
     nearest_landmark = models.CharField(max_length=50)
     pin_code = models.DecimalField(max_digits=6, decimal_places=0)
     house_no_or_name = models.CharField(max_length=50)
-
+    active = models.BooleanField(default=False)
     def __str__(self):
         return f"{self.house_no_or_name} , near {self.nearest_landmark} , {self.locality} , {self.district} , {self.state} , {self.country}"
      
