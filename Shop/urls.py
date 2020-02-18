@@ -29,7 +29,8 @@ urlpatterns = [
 
     # seller related urls
     path('api/seller/<int:seller_id>/products/',AllProductsOfSeller.as_view()),
-    path('api/category/all',CategoryListAPIView.as_view()),
+    path('api/department/<int:pk>/demographics/',DemographicListAPIView.as_view()),
+    path('api/<int:pk>/categories/',CategoryListAPIView.as_view()),
     path('api/company/all',CompanyListAPIView.as_view()),
     path('api/product/create/',ProductCreateAPIView.as_view()),
     path('api/variant/create/',VariantCreateAPIView.as_view()),

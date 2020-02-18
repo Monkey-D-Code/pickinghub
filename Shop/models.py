@@ -101,7 +101,7 @@ class Company(models.Model):
          return self.full_name
 
 class Product(models.Model):
-    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE,blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE , blank=True, null=True)
     name = models.CharField(max_length=250 , unique=True)
     slug = models.SlugField(blank=True,null=True)
@@ -142,7 +142,7 @@ class Product(models.Model):
     @property
     def random_product_image(self):
        if self.variant_set.count() > 0:
-           return self.variant_set.all()[randrange(0 , self.variant_set.count())].random_variant_image
+           return self.variant_set.all()[0].random_variant_image
 
 class Image(models.Model):
     product = models.ForeignKey(Product , on_delete=models.CASCADE)
@@ -166,7 +166,7 @@ class Variant(models.Model):
     @property
     def random_variant_image(self):
         if self.sublet_set.count() > 0:
-            return self.sublet_set.all()[randrange(0 , self.sublet_set.count())].random_image
+            return self.sublet_set.all()[0].random_image
     
 class Sublet(models.Model):
     variant = models.ForeignKey(Variant, on_delete=models.CASCADE)
@@ -184,7 +184,7 @@ class Sublet(models.Model):
     @property
     def random_image(self):
         if self.productimage_set.count() > 0 :
-            return self.productimage_set.all()[randrange(0 , self.productimage_set.count())].image_url
+            return self.productimage_set.all()[0].image_url
         return False
 
     @property

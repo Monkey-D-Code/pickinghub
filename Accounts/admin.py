@@ -55,7 +55,7 @@ class SellerAdmin(admin.ModelAdmin):
         }),
         ("Information" , {
             "fields" :(
-                "image","cover_image","contact_number","address"
+                "image","cover_image","contact_number","address","company_name","start_date","about","confirmed"
             )
         }),
         ("Date & Time" , {

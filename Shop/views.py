@@ -154,10 +154,25 @@ class AllProductsOfSeller(ListCreateAPIView):
             seller=self.kwargs.get('seller_id')
         )
     
+class DemographicListAPIView(ListAPIView):
+    queryset = Demographic.objects.all()
+    serializer_class = DemographicSerializer
+
+    def get_queryset(self):
+        return self.queryset.filter(
+            department = self.kwargs.get('pk')
+        )
+
 
 class CategoryListAPIView(ListAPIView):
     queryset = Category.objects.all()
     serializer_class = CategoryListSerializer
+
+    def get_queryset(self):
+        return self.queryset.filter(
+            demographic = self.kwargs.get('pk')
+        )
+    
 
 class CompanyListAPIView(ListAPIView):
     queryset = Company.objects.all()

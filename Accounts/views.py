@@ -115,8 +115,12 @@ class SellerProfileUpdateAPIView(APIView):
         newSellerData = request.data
         newUserData = newSellerData['user']
         seller = Seller.objects.get(id=newSellerData['id'])
-        seller.contact_number = newSellerData['contact']
+        seller.contact_number = newSellerData['contact_number']
         seller.cover_image = newSellerData['cover_image']
+        seller.company_name = newSellerData['company_name']
+        seller.start_date = newSellerData['start_date']
+        seller.about = newSellerData['about']
+        seller.address = newSellerData['address']
         seller.save()
         user = User.objects.get(id=seller.user_id)
         user.first_name = newUserData['first_name']

@@ -44,13 +44,14 @@ class CustomerCreateSerializer(ModelSerializer):
         )
         user.set_password(validated_data['user']['password'])
         user.save()
-        Customer.objects.create(
+        customer = Customer.objects.create(
             user=user,
             middle_name=validated_data['middle_name'],
         )
 
         Token.objects.create(user=user)
-        return validated_data
+        serializer = CustomerDetailsSerializer(customer)
+        return serializer.data
 
 class CustomerDetailsSerializer(ModelSerializer):
     user = UserSerializer()
@@ -85,6 +86,7 @@ class SellerSerializer(ModelSerializer):
             last_name = user_data["last_name"],
             username = user_data["username"],
             email = user_data["email"],
+            is_staff = True
         )
         user.set_password(user_data['password'])
         user.save()
@@ -94,6 +96,9 @@ class SellerSerializer(ModelSerializer):
             cover_image = validated_data['cover_image'],
             contact_number = validated_data['contact_number'],
             address = validated_data['address'],
+            company_name = validated_data['company_name'],
+            start_date = validated_data['start_date'],
+            about = validated_data['about']
         )
         serializer = SellerSerializer(seller)
         return serializer.data
