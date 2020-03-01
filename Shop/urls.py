@@ -27,6 +27,8 @@ urlpatterns = [
     path('api/order/<int:customer_id>/list/',AllOrdersApiView.as_view()),
     path('api/order/<int:pk>/details/',OrderDetailsAPIView.as_view()),
 
+    path('api/category/<int:pk>/five-products/',Products5OfCategory.as_view()),
+
     # seller related urls
     path('api/seller/<int:seller_id>/products/',AllProductsOfSeller.as_view()),
     path('api/department/<int:pk>/demographics/',DemographicListAPIView.as_view()),

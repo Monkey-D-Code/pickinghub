@@ -202,3 +202,11 @@ class OrderDetailsAPIView(RetrieveAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderDetailsSerializer
     
+
+class Products5OfCategory(ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+    def get_queryset(self):
+        return self.queryset.filter(category=self.kwargs.get('pk')).order_by("?")[:5]
+    
