@@ -77,7 +77,6 @@ class ProductDetailsSerializer(ModelSerializer):
     discountoffers = DiscountOfferSerializer(many=True)
     variants = VariantSerializer(many=True)
     reviews = ReviewSerializer(many=True)
-    questions = QuestionSerializer(many=True)
     random_product_image = URLField()
     class Meta:
         model = Product

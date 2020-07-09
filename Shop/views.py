@@ -74,6 +74,7 @@ class ProductDetailApiView(RetrieveAPIView):
     queryset = Product.objects.all()
 
 
+
 class TrendingProducts(ListAPIView):
     serializer_class = ProductSerializer
     queryset = Product.objects.all()

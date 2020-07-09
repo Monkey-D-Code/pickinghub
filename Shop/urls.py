@@ -13,6 +13,7 @@ urlpatterns = [
     path('api/department/list/',DepartmentListAPIView.as_view()),
     path('api/department/<int:pk>/',DepartmentDetailApiView.as_view()),
     path('api/category/<int:pk>/',CategoryDetailAPIView.as_view()),
+    
 
     path('api/product/<int:pk>/details/',ProductDetailApiView.as_view()),
     path('api/product/<int:product_id>/variants/',VariantsOfProduct.as_view()),
