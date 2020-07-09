@@ -21,6 +21,12 @@ class Customer(models.Model):
     def contacts(self):
         return self.contact_set.all()
 
+    @property
+    def address(self):
+        return self.address_set.all()[0]
+    @property
+    def contact(self):
+        return self.contact_set.all()[0]
 
         
 class Contact(models.Model):

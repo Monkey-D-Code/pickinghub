@@ -5,6 +5,7 @@ from rest_framework.serializers import (
     BooleanField
 )
 from .models import *
+from Accounts.serializers import CustomerCreateSerializer
 
 class ProductSerializer(ModelSerializer):
     random_product_image = URLField()
@@ -60,6 +61,7 @@ class DiscountOfferSerializer(ModelSerializer):
         fields = '__all__'
 
 class ReviewSerializer(ModelSerializer):
+    customer = CustomerCreateSerializer()
     class Meta:
         model = Review
         fields = '__all__'
@@ -68,6 +70,7 @@ class QuestionSerializer(ModelSerializer):
     class Meta:
         model = Question
         fields = '__all__'
+        
 
 class ProductDetailsSerializer(ModelSerializer):
     informations = InformationSerializer(many=True)
@@ -141,11 +144,18 @@ class SingleOrderDetailsSerializer(ModelSerializer):
 
 class OrderSerializer(ModelSerializer):
     sum = DecimalField(max_digits=9,decimal_places=2)
+    is_cancelable = BooleanField()
     orders = SingleOrderDetailsSerializer(many=True)
     class Meta:
         model = Order
         fields = '__all__'
         depth = 2
+
+class CancelOrderSerializer(ModelSerializer):
+
+    class Meta:
+        model = CanceledOrder
+        fields = '__all__'
 
 class OrderDetailsSerializer(ModelSerializer):
     sum = DecimalField(max_digits=9,decimal_places=2)

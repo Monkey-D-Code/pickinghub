@@ -210,3 +210,7 @@ class Products5OfCategory(ListAPIView):
     def get_queryset(self):
         return self.queryset.filter(category=self.kwargs.get('pk')).order_by("?")[:5]
     
+
+class ReviewCreateView(CreateAPIView):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer

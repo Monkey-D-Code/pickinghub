@@ -27,7 +27,15 @@ class Brand(models.Model):
     @property
     def random_normal_image(self):
         return self.normalimage_set.all()[randrange(0,self.normalimage_set.count())].image_url 
+    @property
+    def hero_images(self):
+        return self.heroimage_set.all()
 
+    @property
+    def normal_images(self):
+        return self.normalimage_set.all()
+
+        
     @property
     def terms_conditions(self):
         return self.termcondition_set.all() 

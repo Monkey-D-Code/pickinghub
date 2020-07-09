@@ -1,8 +1,17 @@
 from django.contrib import admin
+from django import forms
 from .models import *
+from Accounts.models import Seller
 from nested_admin import NestedModelAdmin, NestedStackedInline, NestedTabularInline
 from django.utils.safestring import mark_safe
 # Register your models here.
+
+
+#admin fields
+class CustomerChoiceField(forms.ModelChoiceField):
+     def label_from_instance(self, obj):
+         return f"Name : {obj.full_name} | Phone : {obj.contact.number} | Address : {obj.address}"
+
 @admin.register(Department)
 class DepartmentAdmin(admin.ModelAdmin):
     fieldsets = (
@@ -157,23 +166,36 @@ class DiscountOfferInline(admin.StackedInline):
 
 class ReviewInline(admin.StackedInline):
     model = Review
-    extra = 2
+    extra = 1
 class QuestionInline(admin.StackedInline):
     model = Question
-    extra = 2
+    extra = 1
 
 class VariantInline(admin.StackedInline):
     model = Variant
-    extra = 2
+    extra = 1
 
-class ImageInline(admin.StackedInline):
-    model = Image
-    extra = 3
+
 
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    inlines = [ImageInline,InformationInline,VariantInline,DiscountOfferInline,ReviewInline,QuestionInline]
+    
+
+    def get_queryset(self,request):
+        qs = super(ProductAdmin, self).get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(seller=request.user.seller)
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "seller" and not request.user.is_superuser:
+            kwargs["queryset"] = Seller.objects.filter(user=request.user)
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
+
+    
+    inlines = [InformationInline,VariantInline,DiscountOfferInline,ReviewInline,QuestionInline]
     fieldsets = (
         ("Category", {
             "fields": (
@@ -224,6 +246,19 @@ class SubletInline(NestedStackedInline):
 
 @admin.register(Variant)
 class VariantAdmin(NestedModelAdmin):
+
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "product" and not request.user.is_superuser:
+            kwargs["queryset"] = Product.objects.filter(seller=request.user.seller)
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
+
+    def get_queryset(self,request):
+        qs = super(VariantAdmin, self).get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(product__seller=request.user.seller)
     inlines = [SubletInline,]
     fieldsets = (
         ("Product", {
@@ -241,9 +276,7 @@ class VariantAdmin(NestedModelAdmin):
     search_fields = ("product__name",)
     list_filter = ['product']
 
-class ProductImageInline(admin.TabularInline):
-    model = ProductImage
-    extra = 4
+
 
 
 
@@ -304,12 +337,29 @@ class SpecialDealAdmin(admin.ModelAdmin):
 
 
 class SingleOrderInline(admin.StackedInline):
+    def get_queryset(self,request):
+        qs = super(SingleOrderInline, self).get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(sublet__variant__product__seller=request.user.seller)
+    
+    
+
     model = SingleOrder
     extra = 1
+    fields = ("product","sublet","quantity","total","date","time")
+    readonly_fields = ("product","date","time","total")
+
+    def product(self,obj):
+        return obj.get_product()
 
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == 'customer' and request.user.is_superuser:
+            return CustomerChoiceField(queryset=Customer.objects.all())
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
     inlines = [SingleOrderInline,]
     fieldsets = (
         ("Customer", {
@@ -345,3 +395,45 @@ class OrderAdmin(admin.ModelAdmin):
     list_filter = ['date' , "confirmed" , "dispatched","delivered"]
     search_fields = ("customer__user__first_name","customer__user__last_name",)
     
+# @admin.register(CanceledOrder)
+# class CanceledOrderAdmin(admin.ModelAdmin):
+
+#     fieldsets = (
+#         ("Order",{
+#             "fields" : (
+#                 "order",
+#             )
+#         }),
+#         ("Cancel",{
+#             "fields" : (
+#                 "cancel_confirmed","reason_for_cancel"
+#             )
+#         }),
+#         ("Response From Picking Hub",{
+#             "fields" : (
+#                 "message_from_pickinghub",
+#             )
+#         }),
+#         ("Timestamp",{
+#             "fields" : (
+#                 ("date","time"),
+#             )
+#         })
+#     )
+#     readonly_fields = ["date","time","reason_for_cancel"]
+#     list_display = ['order', "get_customer", "date" , "time" ,]
+#     list_filter = ['date' , "time" , "cancel_confirmed",]
+#     search_fields = ("order","get_customer")
+
+
+# @admin.register(ReturnOrder)
+# class ReturnOrderAdmin(admin.ModelAdmin):
+
+#     fieldsets = (
+#         ("Single Order" , {
+#             "fields" : (
+#                 "single_order",
+#             ),
+#         }),
+
+#     )

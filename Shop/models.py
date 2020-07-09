@@ -5,6 +5,7 @@ from Accounts.models import (
 )
 from random import randrange
 from datetime import *
+from django.utils.safestring import mark_safe
 # Create your models here.
 
 
@@ -138,19 +139,11 @@ class Product(models.Model):
     @property
     def questions(self):
         return self.question_set.all()
-        
+    
     @property
     def random_product_image(self):
-       if self.variant_set.count() > 0:
-           return self.variant_set.all()[0].random_variant_image
+        return self.variant_set.all()[0].random_variant_image
 
-class Image(models.Model):
-    product = models.ForeignKey(Product , on_delete=models.CASCADE)
-    image_url = models.URLField(max_length=400)
-    caption = models.TextField(blank=True,null=True)
-
-    def __str__(self):
-        return self.product
 
 class Variant(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -251,6 +244,7 @@ class Question(models.Model):
     customer = models.ForeignKey(Customer , on_delete=models.CASCADE)
     product = models.ForeignKey(Product , on_delete=models.CASCADE)
     question_text = models.TextField()
+    answer = models.TextField(blank=True,null=True)
 
     date = models.DateField(auto_now_add=True)
     time = models.TimeField(auto_now_add=True)
@@ -290,11 +284,36 @@ class Order(models.Model):
     def orders(self):
         return self.singleorder_set.all()
 
+    @property
+    def is_cancelable(self):
+        if self.dispatched : 
+            return False
+        return True
+
+    
+
+class CanceledOrder(models.Model):
+    order = models.ForeignKey(Order , on_delete=models.CASCADE)
+    cancel_confirmed = models.BooleanField(default=False)
+    reason_for_cancel = models.TextField(blank=True,null=True)
+    message_from_pickinghub = models.TextField(blank=True,null=True)
+
+    date = models.DateField(auto_now_add=True)
+    time = models.TimeField(auto_now_add=True)
+
+    @property
+    def get_customer(self):
+        return self.order.customer
+
+    def __str__(self):
+        return str(self.order)
+
 
 class SingleOrder(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     sublet = models.ForeignKey(Sublet, on_delete=models.CASCADE)
     quantity = models.IntegerField()
+    
 
 
     date = models.DateField(auto_now_add=True)
@@ -305,8 +324,36 @@ class SingleOrder(models.Model):
         return self.sublet.selling_price * self.quantity
 
     def __str__(self):
-        return str(self.order)
+        return str(self.total)
 
+    def get_product(self):
+        variant = Variant.objects.get(id=self.sublet.variant.id)
+        if variant: 
+            product = Product.objects.get(id=variant.product.id)
+            if product :
+                return mark_safe(
+                    f"""
+                        <h2>
+                            PRODUCT : {product.name} | VARIANT : {variant.label}
+                        </h2>
+                    """
+                )
+        return False
+
+
+
+class ReturnOrder(models.Model):
+    single_order = models.OneToOneField(SingleOrder,on_delete=models.PROTECT)
+    return_confirmed = models.BooleanField(default=False)
+    return_completed = models.BooleanField(default=False)
+
+
+    date = models.DateField(auto_now_add=True)
+    time = models.TimeField(auto_now_add=True)
+
+
+    def __str__(self):
+        return str(self.single_order)
 
 class SpecialDeal(models.Model):
     title = models.CharField(max_length=50)

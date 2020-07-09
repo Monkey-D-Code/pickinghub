@@ -1,6 +1,55 @@
 from django.contrib import admin
 from .models import *
 from django.utils.safestring import mark_safe
+from django.contrib.auth.models import User
+from django.contrib.auth.admin import UserAdmin
+from typing import Set
+
+
+# Unregister the provided model admin
+admin.site.unregister(User)
+
+
+@admin.register(User)
+class CustomUserAdmin(UserAdmin):
+    def get_queryset(self,request):
+        qs = super(UserAdmin, self).get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(id=request.user.id)
+
+    def get_form(self, request, obj=None, **kwargs):
+        form = super().get_form(request, obj, **kwargs)
+        is_superuser = request.user.is_superuser
+        disabled_fields = set()
+
+        if (
+            not is_superuser
+            and obj is not None
+            and obj == request.user
+        ):
+            disabled_fields |= {
+                'is_staff',
+                'is_superuser',
+                'groups',
+                'user_permissions',
+            }
+            disabled_fields |= {
+                'username',
+                'is_superuser',
+                'is_staff',
+                'is_active',
+                'user_permissions',
+                'user_groups',
+            }
+
+        for f in disabled_fields:
+            if f in form.base_fields:
+                form.base_fields[f].disabled = True
+
+        return form
+
+
 # Register your models here.
 
 class AddressInline(admin.StackedInline):
@@ -47,6 +96,33 @@ class MasterAdmin(admin.ModelAdmin):
     
 @admin.register(Seller)
 class SellerAdmin(admin.ModelAdmin):
+    def get_queryset(self,request):
+        qs = super(SellerAdmin, self).get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(user=request.user)
+
+    def get_form(self, request, obj=None, **kwargs):
+        form = super().get_form(request, obj, **kwargs)
+        is_superuser = request.user.is_superuser
+        disabled_fields = set()
+
+        if (
+            not is_superuser
+            and obj is not None
+            and obj == request.user
+        ):
+            
+            disabled_fields |= {
+                'confirmed',
+                
+            }
+
+        for f in disabled_fields:
+            if f in form.base_fields:
+                form.base_fields[f].disabled = True
+
+        return form
     fieldsets = (
         ("User" , {
             "fields" : (

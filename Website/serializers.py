@@ -37,6 +37,8 @@ class BrandSerializer(ModelSerializer):
     terms_conditions = TermConditionSerializer(many=True)
     privacy_policy = PrivacyPolicySerializer(many=True)
     return_policy = ReturnPolicySerializer(many=True)
+    hero_images = HeroImageSerializer(many=True)
+    normal_images = NormalImageSerializer(many=True)
     class Meta:
         model = Brand
         fields = '__all__'
