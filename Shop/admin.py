@@ -356,10 +356,10 @@ class SingleOrderInline(admin.StackedInline):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == 'customer' and request.user.is_superuser:
-            return CustomerChoiceField(queryset=Customer.objects.all())
-        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+    # def formfield_for_foreignkey(self, db_field, request, **kwargs):
+    #     if db_field.name == 'customer' and request.user.is_superuser:
+    #         return CustomerChoiceField(queryset=Customer.objects.all())
+    #     return super().formfield_for_foreignkey(db_field, request, **kwargs)
     inlines = [SingleOrderInline,]
     fieldsets = (
         ("Customer", {
