@@ -29,7 +29,7 @@ urlpatterns = [
     path('api/order/<int:pk>/details/',OrderDetailsAPIView.as_view()),
 
     path('api/category/<int:pk>/five-products/',Products5OfCategory.as_view()),
-    path('api/review/create/' ,ReviewCreateView.as_view()),
+    path('api/review/create/' ,ReviewCreateApiView.as_view()),
 
     # seller related urls
     path('api/seller/<int:seller_id>/products/',AllProductsOfSeller.as_view()),

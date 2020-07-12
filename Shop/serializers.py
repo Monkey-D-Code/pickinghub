@@ -66,6 +66,11 @@ class ReviewSerializer(ModelSerializer):
         model = Review
         fields = '__all__'
 
+class ReviewCreateSerializer(ModelSerializer):
+    class Meta:
+        model = Review
+        fields = '__all__'
+
 class QuestionSerializer(ModelSerializer):
     class Meta:
         model = Question

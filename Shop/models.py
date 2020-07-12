@@ -234,6 +234,7 @@ class Review(models.Model):
     rating = models.IntegerField()
     comment = models.TextField()
 
+
     date = models.DateField(auto_now_add=True)
     time = models.TimeField(auto_now_add=True)
 

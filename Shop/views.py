@@ -215,3 +215,16 @@ class Products5OfCategory(ListAPIView):
 class ReviewCreateView(CreateAPIView):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
+
+class ReviewCreateApiView(APIView):
+    def post(self,request):
+        reviewData  =   request.data;
+        review      =   Review.objects.create(
+            customer_id =  reviewData['customer'],
+            product_id  =   reviewData['product'],
+            rating      =   reviewData['rating'],
+            comment     =   reviewData['comment'],
+        )
+
+        serializer = ReviewSerializer(review);
+        return Response(serializer.data,status=status.HTTP_201_CREATED)
