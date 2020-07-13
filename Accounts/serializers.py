@@ -1,6 +1,7 @@
 from rest_framework.serializers import (
     ModelSerializer,
     CharField,
+    ValidationError,
 )
 from .models import *
 from django.contrib.auth.models import User
@@ -35,7 +36,9 @@ class CustomerCreateSerializer(ModelSerializer):
         fields = '__all__'
 
     def create(self , validated_data):
-        
+        old_user = User.objects.filter(email=validated_data['user']['email'])
+        if(old_user.count() > 0):
+            raise ValidationError('Email already exists.')
         user = User.objects.create(
             first_name=validated_data['user']['first_name'],
             last_name=validated_data['user']['last_name'],

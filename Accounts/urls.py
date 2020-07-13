@@ -26,4 +26,7 @@ urlpatterns = [
 
     path('api/customer/<int:customer_id>/address/' ,CustomerAddressCreateAPIView.as_view()),
     path('api/customer/<int:customer_id>/contact/',CustomerContactCreateAPIView.as_view()),
+
+    path('api/customer/forgot-password/',ForgotPasswordApiView.as_view()),
+    path('api/customer/change-password/',ChangePasswordApiView.as_view()),
 ]

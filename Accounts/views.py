@@ -24,6 +24,12 @@ from rest_framework import status
 from .serializers import *
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
+
+
+from django.core.mail import send_mail
+from Pickinghub.settings import EMAIL_HOST_USER
+from django.utils.crypto import get_random_string
+
 # Create your views here.
 class WebloginView(LoginView):
     template_name = 'Accounts/login.html'
@@ -144,3 +150,49 @@ class CustomerContactCreateAPIView(ListCreateAPIView):
 
     def get_queryset(self):
         return self.queryset.filter(customer=self.kwargs.get('customer_id'))
+
+
+
+class ForgotPasswordApiView(APIView):
+    def post(self,request):
+        email       =   request.data["email"]
+        if(email == ""):
+            return Response({'message' : 'Please provide a registered email'},status=status.HTTP_400_BAD_REQUEST)
+        
+
+        user     =  User.objects.filter(
+            is_staff = False,
+            email    = email
+        )
+        if(user.count() == 0):
+            return Response({'message' : 'Email not registered'},status=status.HTTP_400_BAD_REQUEST)
+
+        new_password    =   get_random_string(length=8)
+        user = User.objects.get(email=email)
+        user.set_password(new_password)
+        user.save()
+
+        subject     =   'Password reset pickinghub.com'
+        message     =   f"Password reset successful for \n USERNAME : {user.username}.\nYour new PASSWORD : {new_password}"
+
+        try:
+            send_mail(subject,message,EMAIL_HOST_USER,[email],fail_silently=False)
+            return Response({'status' : 'Mail sent successfully'});
+        except Exception as e:
+            print(e)
+            return Response({'message' : 'Email sending failed'},status=status.HTTP_400_BAD_REQUEST);
+        
+
+class ChangePasswordApiView(APIView):
+    def post(self,request):
+        postData    =     request.data;
+        try:
+            user = User.objects.get(username=postData['username'])
+            if(user.check_password(postData['old_password'])):
+                user.set_password(postData['new_password'])
+                user.save()
+                return Response({'message' : 'Password changed successfully'},status=status.HTTP_200_OK)
+            else:
+                return Response({'message' : 'Old Password is wrong'},status=status.HTTP_400_BAD_REQUEST)
+        except:
+            return Response({'message' : 'User does not exits'},status=status.HTTP_400_BAD_REQUEST)

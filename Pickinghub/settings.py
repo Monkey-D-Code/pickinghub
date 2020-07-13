@@ -134,3 +134,14 @@ STATICFILES_DIRS = [
 
 LOGIN_REDIRECT_URL = reverse_lazy('Accounts:profile')
 LOGOUT_REDIRECT_URL = reverse_lazy('Accounts:web-login')
+
+
+
+# SENDING EMAILS
+EMAIL_BACKEND       =   'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST          =   'mail.pickinghub.com'
+EMAIL_HOST_USER     =   'passwords@pickinghub.com'
+EMAIL_HOST_PASSWORD =   'Lhl81*1g'
+EMAIL_PORT          =   25
+EMAIL_USE_TLS       =   False
+EMAIL_USER_SSL      =   False
