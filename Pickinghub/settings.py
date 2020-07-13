@@ -139,9 +139,9 @@ LOGOUT_REDIRECT_URL = reverse_lazy('Accounts:web-login')
 
 # SENDING EMAILS
 EMAIL_BACKEND       =   'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST          =   'mail.pickinghub.com'
-EMAIL_HOST_USER     =   'passwords@pickinghub.com'
-EMAIL_HOST_PASSWORD =   'Lhl81*1g'
-EMAIL_PORT          =   25
-EMAIL_USE_TLS       =   False
+EMAIL_HOST          =   'smtp.gmail.com'
+EMAIL_HOST_USER     =   'sanisaha036@gmail.com'
+EMAIL_HOST_PASSWORD =   'Sani255570#'
+EMAIL_PORT          =   587
+EMAIL_USE_TLS       =   True
 EMAIL_USER_SSL      =   False
