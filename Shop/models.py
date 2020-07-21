@@ -169,6 +169,7 @@ class Sublet(models.Model):
     selling_price = models.DecimalField(max_digits=7, decimal_places=2)
     purchase_price = models.DecimalField(max_digits=7, decimal_places=2,blank=True,null=True)
     stock = models.IntegerField(blank=True,null=True)
+    out_of_stock    =   models.BooleanField(default=False)
     def __str__(self):
         return self.value
     @property
