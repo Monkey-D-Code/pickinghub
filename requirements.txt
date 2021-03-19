@@ -2,7 +2,7 @@ Django==2.2.4
 django-cors-headers==3.0.2
 django-nested-admin==3.2.3
 django-widget-tweaks==1.4.5
-djangorestframework==3.10.2
+djangorestframework==3.11.2
 python-monkey-business==1.0.0
 pytz==2019.2
 six==1.12.0
